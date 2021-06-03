@@ -12,12 +12,12 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'about',
-    component: AboutComponent
-  },
-  {
     path: 'store',
     component: StoreComponent
+  },
+  {
+    path: 'about',
+    component: AboutComponent
   },
   {
     path: 'login',
