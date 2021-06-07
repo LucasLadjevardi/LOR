@@ -3,10 +3,8 @@
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-attachment: cover;
-    width: 100vw;
-    
+    width: 100%;   
 }
-
 
 .banner {
     position: relative;
