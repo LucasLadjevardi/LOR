@@ -3,13 +3,10 @@
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-attachment: cover;
+    width: 100vw;
+    
 }
-.bg-image-2 {
-    background-image: url("../../assets/Cuby.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-attachment: cover;
-}
+
 
 .banner {
     position: relative;
