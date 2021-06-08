@@ -1,0 +1,15 @@
+.icon-hover{
+    transition: transform .25s;
+    color: #198754;
+}
+
+.icon-hover:hover {
+    transform: scale(1.25);
+    color: white;
+}
+
+#footer {
+    position: relative;
+    bottom: 0vh;
+    width: 100%;
+}

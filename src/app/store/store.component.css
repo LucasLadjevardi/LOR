@@ -1,0 +1,16 @@
+.game-banner{
+    transition: transform .25s;
+}
+
+.game-banner:hover {
+    transform: scale(1.15);
+} 
+
+.game-banner > * {
+    color: #198754;
+    text-decoration: none;
+}
+
+.game-banner:hover > * {
+    color: white;
+}
