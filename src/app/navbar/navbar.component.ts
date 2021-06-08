@@ -21,11 +21,11 @@ export class NavbarComponent implements OnInit {
     var currentScrollPos = window.pageYOffset;//her se vi hvor vi er efter man har "scroll"
     if (prevScrollpos > currentScrollPos) {
       //vi få navbar til at kommer fram igen
-      setTimeout(()=>{NavBar?.setAttribute("style","top: -25px")},250)
+      /*setTimeout(()=>{NavBar?.setAttribute("style","top: -25px")},250)
       setTimeout(()=>{NavBar?.setAttribute("style","top: -15px")},500)
       setTimeout(()=>{NavBar?.setAttribute("style","top: -5px")},750)
-      setTimeout(()=>{NavBar?.setAttribute("style","top: 0px")},1000)
-      //NavBar?.setAttribute("style","top : 0")
+      setTimeout(()=>{NavBar?.setAttribute("style","top: 0px")},1000)*/
+      NavBar?.setAttribute("style","top : 0")
     } else {
       //få navbar til at "hide"
       NavBar?.setAttribute("style","top: -50px")

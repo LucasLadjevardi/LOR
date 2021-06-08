@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
       <div class="text-center p-0">
-          <div id="carouselExampleSlidesOnly" class="carousel slide carousel-control-width 100%" data-bs- ride="carousel">
+          <div id="carouselExampleSlidesOnly" class="carousel slide carousel-control-width 100%" data-bs-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
                   <img src="..\assets\slideshow1.jpeg" class="d-block w-100" alt="...">
@@ -24,23 +24,18 @@
             </div>
       </div>
   </div>
-  <div class="row mt-5 Launcher">
-      <div class="col-2 justify-content-center" >
+  <div class="row mt-5 mb-5 Banner-Bg justify-content-md-around text-success">
+      <div class="col-2 " >
         <h1 class="fw-bold">Download Lor.exe</h1>
           <div id="info">
-            <h5>All our game in one place</h5>
-            <h5>Chat with your frindes</h5>
-            <h5>brows the store</h5>
+            <h5><i class="fas fa-cloud-upload-alt text-white-50"></i> All of our games in one place</h5>
+            <h5><i class="fas fa-user-friends text-white-50"></i> Chat with your friends</h5>
+            <h5><i class="fas fa-shopping-basket text-white-50"></i> browse the store</h5>
           </div>
-        <button class="btn-sm btn-dark btn-outline-success" type="button" (click)="DownloadLauncher()">Download</button>
+        <button class="btn-lg btn-dark btn-outline-success" type="button" (click)="DownloadLauncher()"><i class="fas fa-download"></i> Download</button>
       </div>
       <div class="col-4">
         <img src="..\assets\PlaceholderImage.png" alt="">
       </div>
-  </div>
-  <div class="card-footer">
-    <div>
-      <app-about></app-about>
-    </div>
   </div>
 </div>
