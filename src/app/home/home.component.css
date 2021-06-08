@@ -1,0 +1,21 @@
+.Launcher{
+    background: linear-gradient(to right,  rgba(25,135,84,1)0%,rgba(33,37,41,1) 100%);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+    /*background: rgb(2,0,36);
+    background: linear-gradient( rgba(25,135,84,1)0%, rgba(34,139,34,1) 35%, rgba(33,37,41,1) 100%);*/
+    /*background-color:  linear-gradient(rgba(25,135,84) 85%,rgba(0,0,0)15%)
+    background-image:  linear-gradient(#198754,#198754,black)*/
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
