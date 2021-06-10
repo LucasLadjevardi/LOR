@@ -8,21 +8,30 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private _router: Router) { }
+  public UserName ="";
+  public Password="";
+  public RepeatPassword="";
+  public Email="";
   
-  ngOnInit(): void {
+  
+  constructor(private _router: Router) {
 
   }
+  
+  ngOnInit(): void {
+  
+
+  }
+
+
 
   CheckUserLogin(){
     console.log("wORKS");
   }
 
   CreateAccount(){
-    let UserName = document.getElementById("UserName")
-    let Password = document.getElementById("Password")
-    let PasswordRepeat = document.getElementById("PasswordRepeat")
-    let Email = document.getElementById("Email")
-    console.log(UserName);
+    if(this.RepeatPassword==this.Password){
+      console.log("Account Create welcome", this.UserName)
+    }
   }
 }

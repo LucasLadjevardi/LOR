@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _router: Router) { }
 
   ngOnInit(): void {
     this.HideNavBar()
@@ -21,17 +21,18 @@ export class NavbarComponent implements OnInit {
     var currentScrollPos = window.pageYOffset;//her se vi hvor vi er efter man har "scroll"
     if (prevScrollpos > currentScrollPos) {
       //vi få navbar til at kommer fram igen
-      /*setTimeout(()=>{NavBar?.setAttribute("style","top: -25px")},250)
-      setTimeout(()=>{NavBar?.setAttribute("style","top: -15px")},500)
-      setTimeout(()=>{NavBar?.setAttribute("style","top: -5px")},750)
-      setTimeout(()=>{NavBar?.setAttribute("style","top: 0px")},1000)*/
-      NavBar?.setAttribute("style","top : 0")
+      NavBar?.setAttribute("style","top: 0px; transition: top .5s; transition-timing-function: ease-in;")
     } else {
       //få navbar til at "hide"
-      NavBar?.setAttribute("style","top: -50px")
+      NavBar?.setAttribute("style","top: -50px; transition: top .5s; transition-timing-function: ease-out;")
     }
    prevScrollpos = currentScrollPos;
     }
+  }
+
+  CheckIfUserIsLogin(){
+    //lave et Check få at se hvis bruger er logged ind
+    this._router.navigate(['/login']);
   }
 }
 

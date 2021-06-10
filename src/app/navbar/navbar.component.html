@@ -1,13 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top" id="navbar" >
     <div class="container-fluid">
-        <h4 class="text-white">LOR</h4>
+        <h4>LOR</h4>
+        <!--<h4 class="text-white">LOR</h4>-->
         <form class="container-fluid justify-content-start">
-            <button class="btn btn-sm btn-outline-transparrent text-white" routerLink="/home" type="button">Home</button>
-            <button class="btn btn-sm btn-outline-transparrent text-white" routerLink="/store" type="button">Store</button>
-            <button class="btn btn-sm btn-outline-transparrent text-white" routerLink="/about" type="button">About</button>
+            <button class="btn btn-sm btn-outline-transparrent navtext-hover" routerLink="/home" type="button">Home</button>
+            <button class="btn btn-sm btn-outline-transparrent navtext-hover" routerLink="/store" type="button">Store</button>
+            <button class="btn btn-sm btn-outline-transparrent navtext-hover" routerLink="/about" type="button">About</button>
         </form>
         <form>
-           <button class="btn btn-sm btn-outline-transparrent text-white" routerLink="/login" type="button">Profile</button>
+            <!--<button class="btn btn-sm btn-outline-transparrent  text-white" routerLink="/login" type="button">Profile</button>-->
+           <button class="btn btn-sm  text-success rounded-circle" (click)="CheckIfUserIsLogin()" type="button" ><i class="fas fa-user icon-hover"></i></button>
         </form>
     </div>
 </nav>
