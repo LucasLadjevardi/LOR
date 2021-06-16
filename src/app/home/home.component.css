@@ -43,6 +43,10 @@ div.Banner-Bg{
 	animation: slideIn 3s;
 }
 
-img{
+.LauncherImg{
 	animation: fadeIn 3s;
+}
+
+.overflowh {
+	overflow-x: hidden;
 }

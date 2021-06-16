@@ -10,7 +10,7 @@
         </div>
         <div class="d-flex">
             <div class="p-2">
-                <button type="button" class="btn btn-sm btn-outline-dark text-white-50" (click)="CheckUserLogin()">Login</button>
+                <button type="button" class="btn btn-sm btn-outline-dark text-white-50" (click)="AccountLogIn()">Login</button>
             </div>
             <div class="p-2">
                 <button type="button" class="btn btn-sm btn-outline-dark text-white-50" data-bs-toggle="modal"
@@ -46,7 +46,7 @@
             </div>
             <div class="modal-footer bg-dark">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success " (click)="CreateAccount();">Save Account</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="CreateAccount();">Save Account</button>
             </div>
         </div>
     </div>

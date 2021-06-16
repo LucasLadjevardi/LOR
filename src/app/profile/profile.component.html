@@ -1,1 +1,38 @@
-<p>profile works!</p>
+<div class="container-fluid"> 
+    <button type="button" class="btn btn-sm btn-outline-dark text-white-50" id="EditAccoun" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Account</button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white-50">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Account</h5>
+                </div>
+                <div class="modal-body bg-success">
+                    <div class="p-1">
+                        <label for="formGroupExampleInput"  class="form-label text-white">Username</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="UserName" placeholder="Edit your username"/>
+                    </div>
+                    <div class="p-1">
+                        <label for="formGroupExampleInput"  class="form-label text-white">Old Password</label>
+                        <input type="Password" class="form-control" id="formGroupExampleInput" [(ngModel)]="OldPassword" placeholder="Input your old password" />
+                    </div>
+                    <div class="p-1">
+                        <label for="formGroupExampleInput" class="form-label text-white">New Password</label>
+                        <input type="Password" class="form-control" id="formGroupExampleInput" [(ngModel)]="NewPassword" placeholder="Input your new password" />
+                    </div>
+                    <div class="p-1">
+                        <label for="formGroupExampleInput" class="form-label text-white">Repeat your new Password</label>
+                        <input type="Password" class="form-control" id="formGroupExampleInput" [(ngModel)]="RepeatNewPassword" placeholder="Repeat your new password" />
+                    </div>
+                    <div class="p-1">
+                        <label for="formGroupExampleInput"  class="form-label text-white">E-mail</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="Email" placeholder="Edit your E-mail" />
+                    </div>
+                    
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="routingtohmoe();">Close</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="EditAccount();">Save Edit</button>
+                </div>
+            </div>
+        </div>
+</div>

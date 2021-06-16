@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, ɵɵNgOnChangesFeature } from '@angular/core';
 import {Router} from '@angular/router';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-login',
@@ -12,21 +13,27 @@ export class LoginComponent implements OnInit {
   public Password="";
   public RepeatPassword="";
   public Email="";
+ 
   
-  
-  constructor(private _router: Router) {
+  constructor(private _router: Router, private _NavBar :NavbarComponent) {
 
   }
   
   ngOnInit(): void {
-  
 
   }
 
 
 
-  CheckUserLogin(){
-    console.log("wORKS");
+  AccountLogIn(){
+    if(this.UserName!=" " && this.Password!=" "){
+      this._router.navigate(['/home']);
+      this._NavBar.TestToSeeIfUserIsLogin(true)
+    }
+    else{
+      this._NavBar.TestToSeeIfUserIsLogin(false)
+    }
+    
   }
 
   CreateAccount(){
