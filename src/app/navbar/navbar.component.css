@@ -20,7 +20,6 @@
 .navtext-hover {
     transform: scale(1.25);
     color: #198754;
-    text-shadow:0 0 .125em hsl(317,100%, 54%);
 }
 .navtext-hover:hover {
     transform: scale(1.25);
@@ -33,4 +32,13 @@
   left: auto;
   display: block;
   
+}
+
+@font-face {
+  font-family: 'zero_velocity_brkregular';
+  src: url('../../assets/Fonts/zerovelo-webfont.woff2') format('woff2'),
+       url('../../assets/Fonts/zerovelo-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
 }
