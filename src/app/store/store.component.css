@@ -1,0 +1,49 @@
+
+  
+  .game-banner {
+    animation: fadeIn 5s;
+  }
+  
+  /* .loaded .page-header nav > *,
+  .loaded .page-footer > * {
+    animation: fadeIn 1s ease-in 0.7s forwards, slideIn 0.8s ease-in 0.9s forwards;
+  } */
+  
+  .SlideIn{
+    animation: slideIn 1s;
+  }
+  
+  @keyframes fadeIn {
+
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  
+  @keyframes slideIn {
+    from {
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+      }
+    
+      to {
+        transform: translate3d(0, 0, 0);
+      }
+  }
+
+.game-banner{
+    transition: transform .25s;
+}
+
+.game-banner:hover {
+    transform: scale(1.15);
+} 
+
+.game-banner > * {
+    color: #198754;
+    text-decoration: none;
+}
+
+.game-banner:hover > * {
+    color: white;
+}
+

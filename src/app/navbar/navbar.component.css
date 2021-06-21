@@ -1,0 +1,36 @@
+@keyframes slideInFromTop {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  .navbar {  
+    /* This section calls the slideInFromLeft animation we defined above */
+    animation: 1s ease-out 0s 1 slideInFromTop;
+  }
+  
+  .icon-hover:hover {
+    transform: scale(1.25);
+    color: white;
+}
+
+.navtext-hover {
+    transform: scale(1.25);
+    color: #198754;
+    text-shadow:0 0 .125em hsl(317,100%, 54%);
+}
+.navtext-hover:hover {
+    transform: scale(1.25);
+    color: white;
+}
+
+
+.dropdown:hover .dropdown-menu{
+  right: 0;
+  left: auto;
+  display: block;
+  
+}

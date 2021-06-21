@@ -1,0 +1,52 @@
+	@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+@keyframes fadeIn {
+
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  
+  @keyframes slideIn {
+    from {
+        transform: translate3d(25%, 0, 0);
+        opacity: .0;
+      }
+    
+      to {
+        transform: translate3d(0, 0, 0);
+		opacity: 1;
+      }
+  }
+
+
+div.Banner-Bg{
+	background-size: 400% 400% ;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: cover;
+	background-image: linear-gradient(to right,  rgba(25,135,84,0.4),rgba(21, 104, 66, 0.4)),url("src\assets\cuby.png");
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+
+.col-2{
+	animation: slideIn 3s;
+}
+
+.LauncherImg{
+	animation: fadeIn 3s;
+}
+
+.overflowh {
+	overflow-x: hidden;
+}
