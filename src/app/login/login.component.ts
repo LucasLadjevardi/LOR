@@ -22,9 +22,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
-
-
+  
   AccountLogIn(){
     if(this.UserName!=" " && this.Password!=" "){
       this._router.navigate(['/home']);
