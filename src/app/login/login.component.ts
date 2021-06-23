@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, ɵɵNgOnChangesFeature } from '@angular/core';
 import {Router} from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-login',
@@ -22,8 +23,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
   
-  
+
   AccountLogIn(){
     if(this.UserName!=" " && this.Password!=" "){
       this._router.navigate(['/home']);
