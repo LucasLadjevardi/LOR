@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output, ɵɵNgOnChangesFeature } from '@angul
 import {Router} from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import * as $ from 'jquery';
+import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-login',
@@ -23,8 +24,27 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
   
+  /*OnLogIn(){
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": Placeholder,
+      "method": "GET",
+      "headers": {
+        Placeholder
+      }
+    }
+    $.ajax(settings).done(function res (response) {
+      console.log(response);
+    })
+    .always(function(response){
+
+    });
+  }*/
+  
+
+
 
   AccountLogIn(){
     if(this.UserName!=" " && this.Password!=" "){
