@@ -9,7 +9,7 @@
         <form *ngIf="(IsLogged | async) == false">
             <!--<button class="btn btn-sm btn-outline-transparrent  text-white" routerLink="/login" type="button">Profile</button>-->
            <button class="btn btn-sm  text-success rounded-circle" (click)="CheckIfUserIsLogin()"  type="button" >
-               <i class="fas fa-user icon-hover"></i>
+               <i class="fas fa-user fa-2x icon-hover"></i>
             </button>
         </form>
         <div class="dropdown" *ngIf="(IsLogged  | async)== true">
