@@ -27,7 +27,8 @@
             </div>
             <div class="w-100"></div>
             <div class="col-sm-3 text-center">
-                <a class="text-dark" href="*">Need help logging in?</a>
+                <a class="text-dark" href="*" data-bs-toggle="modal"
+                data-bs-target="#LoginHelp">Need help logging in?</a>
             </div>
         </div>
 
@@ -41,19 +42,19 @@
                 <div class="modal-body bg-success">
                     <div class="p-1">
                         <label for="formGroupExampleInput"  class="form-label text-white">Username</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="UserName" placeholder="Input your username"/>
+                        <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="UserName" placeholder="Username"/>
                     </div>
                     <div class="p-1">
                         <label for="formGroupExampleInput"  class="form-label text-white">Password</label>
-                        <input type="Password" class="form-control" id="formGroupExampleInput" [(ngModel)]="Password" placeholder="Input your password" />
+                        <input type="Password" class="form-control" id="formGroupExampleInput" [(ngModel)]="Password" placeholder="Your password" />
                     </div>
                     <div class="p-1">
                         <label for="formGroupExampleInput" class="form-label text-white">Repeat Password</label>
-                        <input type="Password" class="form-control" id="formGroupExampleInput" [(ngModel)]="RepeatPassword" placeholder="Repeat your password" />
+                        <input type="Password" class="form-control" id="formGroupExampleInput" [(ngModel)]="RepeatPassword" placeholder="Repeat password" />
                     </div>
                     <div class="p-1">
                         <label for="formGroupExampleInput"  class="form-label text-white">E-mail</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="Email" placeholder="Input your E-mail" />
+                        <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="Email" placeholder="E-mail" />
                     </div>
                 </div>
                 <div class="modal-footer bg-dark">
@@ -63,4 +64,24 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="LoginHelp" tabindex="-1" aria-labelledby="LoginHelpLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white-50">
+                    <h5 class="modal-title" id="LoginHelpLabel">Login Help</h5>
+                </div>
+                <div class="modal-body bg-success">
+                    <div class="p-1">
+                        <label for="formGroupContactInput"  class="form-label text-white">E-mail</label>
+                        <input type="text" class="form-control" id="formGroupContactInput" [(ngModel)]="Email" placeholder="E-mail" />
+                    </div>
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="LoginHelp();">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+

@@ -6,21 +6,21 @@
             <button class="btn btn-sm btn-outline-transparrent navtext-hover" routerLink="/store" type="button">Store</button>
             <button class="btn btn-sm btn-outline-transparrent navtext-hover"  routerLink="/about" type="button">About</button>
         </form>
-        <form *ngIf="(IsLogged | async) == false">
+        <form>
             <!--<button class="btn btn-sm btn-outline-transparrent  text-white" routerLink="/login" type="button">Profile</button>-->
-           <button class="btn btn-sm  text-success rounded-circle" (click)="CheckIfUserIsLogin()"  type="button" >
+           <button class="btn btn-sm  text-success rounded-circle" (click)="LoginRoute()"  type="button" >
                <i class="fas fa-user fa-2x icon-hover"></i>
             </button>
         </form>
-        <div class="dropdown" *ngIf="(IsLogged  | async)== true">
+        <!--<div class="dropdown" *ngIf="(IsLogged  | async)== true">
             <button class="btn btn-sm  text-success rounded-circle dropdown-toggle" type="button" id="LoginButton" data-bs-toggle="collapse" 
             data-bs-auto-close="true" aria-expanded="false" ><i class="fas fa-user fa-2x icon-hover" aria-label="Toggle navigation"></i>
             </button>
             <ul class="dropdown-menu" aria-labelledby="LoginButton" >
                 <li><a class="dropdown-item" routerLink="/profile">Edit Profile</a></li>
-                <li><a class="dropdown-item" routerLink="" (click)="LogOut()">Log out</a></li>
+                <li><a class="dropdown-item" routerLink="">Log out</a></li>
             </ul>
-        </div>
+        </div>-->
     </div>
 </nav>
 
