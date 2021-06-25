@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, ɵɵNgOnChangesFeature } from '@angular/core';
 import {Router} from '@angular/router';
-import { NavbarComponent } from '../navbar/navbar.component';
+import { LoginService } from '../service/login.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import * as $ from 'jquery';
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
@@ -17,21 +17,18 @@ export class LoginComponent implements OnInit {
   public RepeatPassword="";
   public Email="";
  
-  /*det er en sub-type af en Observable med en BehaviorSubject skal objecte som man får BehaviorSubject på have en value,
-  da det hele tiden sender value til sige "subscription" hvor en observable kun vil sendt det når onnext bliver køret*/ 
-  public ProfileBehavior: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false); 
-  //en ting som man kan gjorde med en BehaviorSubject få en observable som vi har gjordt her
-  public IsLogged: Observable<boolean> = this.ProfileBehavior.asObservable();
-  //en Observable er en function som holder øjer med value/Subject og med den kan man sig at hvis der sker en noget så gøre det her fx en alertbox 
+  
 
-  constructor(private _router: Router, private _NavBar :NavbarComponent) {
+  constructor(private _router: Router, private _LoginService :LoginService) {
 
   }
   
   ngOnInit(): void {
-
+    this._LoginService.IsLogged.subscribe();
   }
   
+  
+
   /*OnLogIn(){
     var settings = {
       "async": true,
@@ -53,14 +50,16 @@ export class LoginComponent implements OnInit {
 
 
 
-  AccountLogIn(){
-    if(this.UserName!=" " && this.Password!=" "){
+  AccountLogin(){
+    //if(this.UserName!=" " && this.Password!=" "){
       this._router.navigate(['/home']);
+      this._LoginService.ProfileBehavior.next(true);
+      
       //this._NavBar.TestToSeeIfUserIsLogin(true)
-    }
-    else{
+    //}
+    //else{
       //this._NavBar.TestToSeeIfUserIsLogin(false)
-    }
+    //}
     
   }
 

@@ -11,6 +11,7 @@ import { AboutComponent } from './about/about.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
+import { LoginService } from './service/login.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   providers: [ 
-    NavbarComponent
+    NavbarComponent,
+    LoginService
   ],
   bootstrap: [AppComponent]
 })
