@@ -36,7 +36,7 @@ export class NavbarComponent implements OnInit {
 
   LoginRoute(){
     this._router.navigate(['/login']);
-  
+    console.log();
   }
 
   LogOut(){
