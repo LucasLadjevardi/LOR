@@ -4,6 +4,7 @@ import { LoginService } from '../service/login.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import * as $ from 'jquery';
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
+import { faUserSecret } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -29,39 +30,37 @@ export class LoginComponent implements OnInit {
   
   
 
-  /*OnLogIn(){
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": Placeholder,
-      "method": "GET",
-      "headers": {
-        Placeholder
-      }
-    }
-    $.ajax(settings).done(function res (response) {
-      console.log(response);
-    })
-    .always(function(response){
-
-    });
-  }*/
-  
-
-
-
   AccountLogin(){
-    //if(this.UserName!=" " && this.Password!=" "){
-      this._router.navigate(['/home']);
-      this._LoginService.ProfileBehavior.next(true);
-      
-      //this._NavBar.TestToSeeIfUserIsLogin(true)
-    //}
-    //else{
-      //this._NavBar.TestToSeeIfUserIsLogin(false)
-    //}
-    
+      var UserCheck: string | any[];
+      this.UserName;
+      this.Password;
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://192.168.4.110:48935/api/Users",
+        "method": "GET"
+      }
+      $.ajax(settings).done( (response) => {
+        UserCheck = response.data;
+      })
+      .then( () => {
+        for (let i = 0; i < UserCheck.length; i++) {
+          var Users = UserCheck[i];
+          if(this.UserName == Users.username)
+          {
+            if(this.Password == Users.password)
+            {
+              this._LoginService.ProfileBehavior.next(true);
+            }
+          }
+          else 
+          {
+            alert("Username or password was incorrect");
+          }
+        }
+      });
   }
+  
 
   CreateAccount(){
     if(this.RepeatPassword==this.Password){
@@ -73,3 +72,4 @@ export class LoginComponent implements OnInit {
 
   }
 }
+
