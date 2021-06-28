@@ -1,5 +1,6 @@
 import {  Component, Input, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import { LoginService } from '../service/login.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
@@ -9,10 +10,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private _router: Router) { }
+ 
+  constructor(private _router: Router, public LoginService: LoginService) { }
 
   ngOnInit(): void {
     this.HideNavBar();
+    this.LoginService.IsLogged.subscribe()
   }
   
   HideNavBar(){
@@ -33,6 +36,12 @@ export class NavbarComponent implements OnInit {
 
   LoginRoute(){
     this._router.navigate(['/login']);
+  
+  }
+
+  LogOut(){
+    this._router.navigate(['/home']);
+    this.LoginService.ProfileBehavior.next(false);
   }
 
   /*TestToSeeIfUserIsLogin(User:boolean){
