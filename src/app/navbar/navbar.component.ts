@@ -40,6 +40,7 @@ export class NavbarComponent implements OnInit {
   }
 
   LogOut(){
+    //kan du se det nu?
     this._router.navigate(['/home']);
     this.LoginService.ProfileBehavior.next(false);
   }
