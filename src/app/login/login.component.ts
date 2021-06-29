@@ -13,10 +13,10 @@ import { faUserSecret } from '@fortawesome/free-solid-svg-icons';
 })
 export class LoginComponent implements OnInit {
 
-  public UserName ="";
-  public Password="";
-  public RepeatPassword="";
-  public Email="";
+  public UserName = "";
+  public Password = "";
+  public RepeatPassword = "";
+  public Email = "";
  
   
 
@@ -32,8 +32,6 @@ export class LoginComponent implements OnInit {
 
   AccountLogin(){
       var UserCheck: string | any[];
-      this.UserName;
-      this.Password;
       var settings = {
         "async": true,
         "crossDomain": true,
@@ -41,21 +39,15 @@ export class LoginComponent implements OnInit {
         "method": "GET"
       }
       $.ajax(settings).done( (response) => {
-        UserCheck = response.data;
+        UserCheck = response;
       })
       .then( () => {
         for (let i = 0; i < UserCheck.length; i++) {
           var Users = UserCheck[i];
-          if(this.UserName == Users.username)
+          if(this.UserName == Users.username && this.Password == Users.password)
           {
-            if(this.Password == Users.password)
-            {
-              this._LoginService.ProfileBehavior.next(true);
-            }
-          }
-          else 
-          {
-            alert("Username or password was incorrect");
+            this._LoginService.ProfileBehavior.next(true);
+            this._router.navigate(['/home']);
           }
         }
       });
