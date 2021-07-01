@@ -9,9 +9,9 @@
             <div class="col-sm-3 p-3 mt-4 bg-darkgreen bg-gradient">
                 <div class="mt-3 mb-4">
                     <label style="font-family: zero_velocity_brkregular;" for="formGroupExampleInput" class="form-label pb-2">Username</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="UserName" placeholder="Username" />
+                    <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="UserData[1]" placeholder="Username" />
                     <label style="font-family: zero_velocity_brkregular;" for="formGroupExampleInput" class="form-label pb-2 pt-3">Password</label>
-                    <input type="Password" class="form-control" id="formGroupExampleInput" [(ngModel)]="Password" placeholder="Password" />
+                    <input type="Password" class="form-control" id="formGroupExampleInput" [(ngModel)]="UserData[2]" placeholder="Password" />
                     <div class="form-check mt-3 ">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">Remember Me</label>
@@ -42,24 +42,24 @@
                 <div class="modal-body bg-success">
                     <div class="p-1">
                         <label for="formGroupExampleInput"  class="form-label text-white">Username</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="UserName" placeholder="Username"/>
+                        <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="UserData[1]" placeholder="Username "/>
                     </div>
                     <div class="p-1">
                         <label for="formGroupExampleInput"  class="form-label text-white">Password</label>
-                        <input type="Password" class="form-control" id="formGroupExampleInput" [(ngModel)]="Password" placeholder="Your password" />
+                        <input type="Password" class="form-control" id="formGroupExampleInput" [(ngModel)]="UserData[2]" placeholder="Your password" />
                     </div>
                     <div class="p-1">
-                        <label for="formGroupExampleInput" class="form-label text-white">Repeat Password</label>
-                        <input type="Password" class="form-control" id="formGroupExampleInput" [(ngModel)]="RepeatPassword" placeholder="Repeat password" />
+                        <label for="PasswordRepeat" class="form-label text-white">Repeat Password</label>
+                        <input type="Password" class="form-control" id="PasswordRepeat" [(ngModel)]="UserData[3]" placeholder="Repeat password" />
                     </div>
                     <div class="p-1">
                         <label for="formGroupExampleInput"  class="form-label text-white">E-mail</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="Email" placeholder="E-mail" />
+                        <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="UserData[4]" placeholder="E-mail" />
                     </div>
                 </div>
                 <div class="modal-footer bg-dark">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="CreateAccount();">Save Account</button>
+                    <button type="button" class="btn btn-success" (click)="CreateAccount(UserData);">Save Account</button>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
                 <div class="modal-body bg-success">
                     <div class="p-1">
                         <label for="formGroupContactInput"  class="form-label text-white">E-mail</label>
-                        <input type="text" class="form-control" id="formGroupContactInput" [(ngModel)]="Email" placeholder="E-mail" />
+                        <input type="text" class="form-control" id="formGroupContactInput" [(ngModel)]="UserData[4]" placeholder="E-mail" />
                     </div>
                 </div>
                 <div class="modal-footer bg-dark">
