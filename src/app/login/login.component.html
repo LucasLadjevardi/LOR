@@ -21,7 +21,7 @@
                     </div>
                     <div class="d-flex p-1 justify-content-center">
                         <button type="button" class="btn btn-sm btn-outline-dark text-black w-100" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">Create Account</button>
+                        data-bs-target="#LoginModal">Create Account</button>
                     </div>
                 </div>
             </div>
@@ -31,54 +31,38 @@
                 data-bs-target="#LoginHelp">Need help logging in?</a>
             </div>
         </div>
+    </div>
 
-    </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-dark text-white-50">
-                    <h5 class="modal-title" id="exampleModalLabel">Create Account</h5>
+                    <h5 class="modal-title" id="LoginModalLabel">Create Account</h5>
                 </div>
                 <div class="modal-body bg-success">
-                    <div class="p-1">
-                        <label for="formGroupExampleInput"  class="form-label text-white">Username</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="UserData[1]" placeholder="Username "/>
-                    </div>
-                    <div class="p-1">
-                        <label for="formGroupExampleInput"  class="form-label text-white">Password</label>
-                        <input type="Password" class="form-control" id="formGroupExampleInput" [(ngModel)]="UserData[2]" placeholder="Your password" />
-                    </div>
-                    <div class="p-1">
-                        <label for="PasswordRepeat" class="form-label text-white">Repeat Password</label>
-                        <input type="Password" class="form-control" id="PasswordRepeat" [(ngModel)]="UserData[3]" placeholder="Repeat password" />
-                    </div>
-                    <div class="p-1">
-                        <label for="formGroupExampleInput"  class="form-label text-white">E-mail</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="UserData[4]" placeholder="E-mail" />
-                    </div>
-                </div>
-                <div class="modal-footer bg-dark">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" (click)="CreateAccount(UserData);">Save Account</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="LoginHelp" tabindex="-1" aria-labelledby="LoginHelpLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-dark text-white-50">
-                    <h5 class="modal-title" id="LoginHelpLabel">Login Help</h5>
-                </div>
-                <div class="modal-body bg-success">
-                    <div class="p-1">
-                        <label for="formGroupContactInput"  class="form-label text-white">E-mail</label>
-                        <input type="text" class="form-control" id="formGroupContactInput" [(ngModel)]="UserData[4]" placeholder="E-mail" />
-                    </div>
-                </div>
-                <div class="modal-footer bg-dark">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="LoginHelp();">Send</button>
+                    <form id="FormModal">
+                        <div class="p-1">
+                            <label for="UserNameInput" class="form-label text-white">Username</label>
+                            <input type="text" class="form-control" id="UserNameInput" [(ngModel)]="UserData[1]" placeholder="Username" required/>
+                        </div>
+                        <div class="p-1">
+                            <label for="PasswordInput"  class="form-label text-white">Password</label>
+                            <input type="Password" class="form-control" id="PasswordInput" [(ngModel)]="UserData[2]" placeholder="Your password" required/>
+                        </div>
+                        <div class="p-1">
+                            <label for="PasswordRepeat" class="form-label text-white">Repeat Password</label>
+                            <input type="Password" class="form-control" id="PasswordRepeat" [(ngModel)]="UserData[3]" placeholder="Repeat password" required/>
+                        </div>
+                        <div class="p-1">
+                            <label for="EmailInput"  class="form-label text-white">E-mail</label>
+                            <input type="text" class="form-control" id="EmailInput" [(ngModel)]="UserData[4]" placeholder="E-mail" required/>
+                        </div>
+                        <div class="modal-footer bg-dark">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success" (click)="CreateAccount(UserData);">Save Account</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
