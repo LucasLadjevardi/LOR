@@ -63,32 +63,37 @@
                                     <div *ngIf="UserNameInput.errors?.required">
                                         Invalid Username
                                     </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label for="PasswordInput" class="form-label text-white">Password</label>
-                                <input type="Password" class="form-control" id="PasswordInput"
-                                    [(ngModel)]="this.UserData[0].Password" placeholder="Your password"
-                                    name="CreatePassword" #PasswordInput="ngModel" required minlength="6" />
-                                <div *ngIf="PasswordInput.invalid && (PasswordInput.dirty || PasswordInput.touched)"
-                                    class="alert text-danger">
-                                    <div *ngIf="PasswordInput.errors?.required">
-                                        Invalid Password
-                                    </div>
-                                    <div *ngif="PasswordInput.errors?.minlength">
-                                        Password needs atleast 6 characters
+                                    <div *ngIf?="(this.TakeingUserName | async) == true">
+                                        Username is takeing
                                     </div>
                                 </div>
                             </div>
                             <div>
-                                <label for="PasswordRepeat" class="form-label text-white">Repeat Password</label>
-                                <input type="Password" class="form-control" id="PasswordRepeatInput"
-                                    [(ngModel)]="this.UserData[0].RepeatPassword" placeholder="Repeat password"
-                                    name="CreateRepeatPassword" #PasswordRepeatInput="ngModel" required/>
-                                <div *ngIf="PasswordRepeatInput.invalid && (PasswordRepeatInput.dirty || PasswordRepeatInput.touched)"
-                                    class="alert text-red">
-                                    <div *ngIf="PasswordInput.errors?.required">
-                                        Password does not match
+                                <div>
+                                    <label for="PasswordInput" class="form-label text-white">Password</label>
+                                    <input type="Password" class="form-control" id="PasswordInput"
+                                        [(ngModel)]="this.UserData[0].Password" placeholder="Your password"
+                                        name="CreatePassword" #PasswordInput="ngModel" required minlength="6" />
+                                    <div *ngIf="PasswordInput.invalid && (PasswordInput.dirty || PasswordInput.touched)"
+                                        class="alert text-danger">
+                                        <div *ngIf="PasswordInput.errors?.required">
+                                            Invalid Password
+                                        </div>
+                                        <div *ngIf="PasswordInput.errors?.minlength">
+                                            Password needs atleast 6 characters
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="PasswordRepeat" class="form-label text-white">Repeat Password</label>
+                                    <input type="Password" class="form-control" id="PasswordRepeatInput"
+                                        [(ngModel)]="this.UserData[0].RepeatPassword" placeholder="Repeat password"
+                                        name="CreateRepeatPassword" #PasswordRepeatInput="ngModel" required />
+                                    <div *ngIf="PasswordRepeatInput.invalid && (PasswordRepeatInput.dirty || PasswordRepeatInput.touched)"
+                                        class="alert text-red">
+                                        <div *ngIf="PasswordRepeatInput != PasswordInput">
+                                            Password does not match
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -102,13 +107,13 @@
                                     <div *ngIf="EmailInput.errors?.required">
                                         invalid E-mail
                                     </div>
-                                    <div *ngif="EmailInput.errors?.email">
+                                    <div *ngIf="EmailInput.errors?.email">
                                         invalid E-mail
                                     </div>
-                                   
+
                                 </div>
                             </div>
-                            
+
                         </div>
                     </form>
                 </div>

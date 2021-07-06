@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
 
   LoginForm?: FormGroup;
 
+  TakeingUserName:boolean = false;
+
   public UserData = [{
     id: 0,
     Username: '',
@@ -32,6 +34,7 @@ export class LoginComponent implements OnInit {
   get LoginUserNameControl() {return this.LoginForm?.get('UserNameControl')}
 
   ngOnInit(): void {
+    this.TakeingUserName = LoginService.TakeingUserName;
     this._LoginService.IsLogged.subscribe();
     this.ValidatingLogin();
   }
@@ -49,6 +52,7 @@ export class LoginComponent implements OnInit {
       "error": function (jqXHR: { status: number; }, exception: any) {
         if (jqXHR.status == 404) {
           console.log(exception)
+          LoginService.TakeingUserName=true;
         }
         else if (jqXHR.status == 400) {
           console.log(exception)

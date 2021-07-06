@@ -13,7 +13,11 @@ export class LoginService {
   public IsLogged: Observable<boolean> = this.ProfileBehavior.asObservable();
   //en Observable er en function som holder øjer med value/Subject og med den kan man sig at hvis der sker en noget så gøre det her fx en alertbox 
   
-  public Username:string=  "";
+  /*public static StatusBehavior: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public static status: Observable<boolean> = LoginService.StatusBehavior.asObservable();*/
+  public static TakeingUserName: boolean = false;
+
+ // public Username:string=  "";
 
   constructor() { }
 
