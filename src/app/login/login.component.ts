@@ -6,7 +6,7 @@ import * as $ from 'jquery';
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import { style } from '@angular/animations';
-import { FormControl, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   constructor(private _router: Router, private _LoginService: LoginService) {
   }
 
-  get LoginUserNameControl() {return this.LoginForm?.get('UserNameControl')}
+  get LoginUserNameControl() { return this.LoginForm?.get('UserNameControl') }
 
   ngOnInit(): void {
     this.TakeingUserName = LoginService.TakeingUserName;
@@ -78,8 +78,29 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  CreateAccount(){
-
+  CreateAccount() {
+    if (this.UserData[0].Password == this.UserData[0].RepeatPassword) {
+      $.ajax({
+        url: "http://192.168.4.110:48935/api/Users",
+        type: "POST",
+        async: true,
+        crossDomain: true,
+        dataType: "json",
+        data: JSON.stringify({
+          "username": this.UserData[0].Username,
+          "password": this.UserData[0].Password,
+          "email": this.UserData[0].Email,
+          "role": "User"
+        }),
+        "error": function (jqXHR: { status: number; }, exception: any) {
+          if (jqXHR.status == 400) {
+            console.log(exception)
+          }
+        },
+        contentType: "application/json; charset=utf-8",
+      });
+      console.log(this.UserData);
+    }
   }
 
   ValidatingLogin() {
