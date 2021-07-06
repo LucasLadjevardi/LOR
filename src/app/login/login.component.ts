@@ -15,12 +15,12 @@ import { style } from '@angular/animations';
 export class LoginComponent implements OnInit {
 
   public UserData = [{
-    id: "",
-    Username: "",
-    Password: "",
-    RepeatPassword: "",
-    Email: "",
-    Role: "User"
+    id: 0,
+    Username: '',
+    Password: '',
+    RepeatPassword: '',
+    Email: '',
+    Role: 'User'
   }];
   
   constructor(private _router: Router, private _LoginService :LoginService) {
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   // http://192.168.4.110:48935/api/Users/username/password
   AccountLogin(){
       var UserCheck: any;
-      var url = `http://192.168.4.110:48935/api/Users/${this.UserData[1]}/${this.UserData[2]}`
+      var url = `http://192.168.4.110:48935/api/Users/${this.UserData[0].Username}/${this.UserData[0].Password}`
       var settings = {
         "async": true,
         "crossDomain": true,
@@ -55,39 +55,38 @@ export class LoginComponent implements OnInit {
         UserCheck = response;
       })
       .then( () => {
-        if(UserCheck.username == this.UserData[1] && UserCheck.password == this.UserData[2])
+        if(UserCheck.username == this.UserData[0].Username && UserCheck.password == this.UserData[0].Password)
         {
           this._LoginService.ProfileBehavior.next(true);
           this._router.navigate(['/home']);
         }
       });
   }
-  
-  /*AccountLogin(){
-    var UserCheck: string | any[];
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": "http://192.168.4.110:48935/api/Users",
-      "method": "GET"
-    }
-    $.ajax(settings).done( (response) => {
-      UserCheck = response;
-    })
-    .then( () => {
-      for (let i = 0; i < UserCheck.length; i++) {
-        var Users = UserCheck[i];
-        if(this.UserName == Users.username && this.Password == Users.password)
-        {
-          this._LoginService.ProfileBehavior.next(true);
-          this._router.navigate(['/home']);
-        }
-      }
-    });
-}*/
 
-  CreateAccount(UserData: any){
-    if(UserData[2] == UserData[3]){
+
+
+  CreateAccount(){
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event: { preventDefault: () => void; stopPropagation: () => void; }) {
+          if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+/*     if(this.UserData[0].Password == this.UserData[0].RepeatPassword){
       $.ajax({
         url:"http://192.168.4.110:48935/api/Users",
         type:"POST",
@@ -95,20 +94,14 @@ export class LoginComponent implements OnInit {
         crossDomain:true,
         dataType:"json",
         data:JSON.stringify({
-         "username": UserData[1],
-         "password": UserData[2],
-         "email": UserData[4],
+         "username": this.UserData[0].Username,
+         "password": this.UserData[0].Password,
+         "email": this.UserData[0].Email,
          "role": "User"
         }),
         contentType:"application/json; charset=utf-8",
-    }); 
-    } else if(UserData[2] != UserData[3]){
-      
-    }
-  }
-
-  LoginHelp(){
-
+      });
+      console.log(this.UserData);
+    } */
   }
 }
-
