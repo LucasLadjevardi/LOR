@@ -88,6 +88,11 @@ export class LoginComponent implements OnInit {
           "email": this.UserData[0].Email,
           "role": "User"
         }),
+        "error": function (jqXHR: { status: number; }, exception: any) {
+          if (jqXHR.status == 400) {
+            console.log(exception)
+          }
+        },
         contentType: "application/json; charset=utf-8",
       });
       console.log(this.UserData);
