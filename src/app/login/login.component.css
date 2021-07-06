@@ -10,3 +10,8 @@
 .bg-darkgreen {
     background-color: #05723f !important;
   }
+
+  .text-red{
+    /*background-color: rgba(0,0,0,0.15);*/
+    color: #ff0000;
+  }

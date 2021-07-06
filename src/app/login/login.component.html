@@ -7,16 +7,24 @@
                 </div>
                 <div class="mb-3">
                     <label for="InputUsername" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="InputUsername" placeholder="Username" required>
-                    <div class="invalid-feedback">
-                        Please write a Username
+                    <input type="text" class="form-control" id="InputUsername" [(ngModel)]="UserData[0].Username"
+                        name="InputUsername" placeholder="Username" #InputUsername="ngModel" required>
+                    <div *ngIf="InputUsername.invalid && (InputUsername.dirty || InputUsername.touched)"
+                        class="alert text-red">
+                        <div *ngIf="InputUsername.errors?.required">
+                            Username is required.
+                        </div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="InputPassword" class="form-label">Password</label>
-                    <input type="text" class="form-control" id="InputPassword" placeholder="Password" required>
-                    <div class="invalid-feedback">
-                        Please write a Password
+                    <input type="Password" class="form-control" id="InputPassword" [(ngModel)]="UserData[0].Password"
+                        name="InputPassword" placeholder="Password" #InputPassword="ngModel" required>
+                    <div *ngIf="InputPassword.invalid && (InputPassword.dirty || InputPassword.touched)"
+                        class="alert text-red">
+                        <div *ngIf="InputPassword.errors?.required">
+                            Password is required.
+                        </div>
                     </div>
                 </div>
                 <div class="mb-3 form-check">
@@ -24,10 +32,92 @@
                     <label class="form-check-label text-white" for="RememberMe">Remember me</label>
                 </div>
                 <div class="mb-3">
-                    <button class="btn btn-outline-dark text-white m-1" type="submit" (click)="CreateAccount()">Login</button>
-                    <button class="btn btn-outline-dark text-white m-1" type="button">Create Account</button>
+                    <button class="btn btn-outline-dark text-white m-1" type="submit"
+                        (click)="AccountLogin()">Login</button>
+                    <button class="btn btn-outline-dark text-white m-1" type="button" data-bs-toggle="modal"
+                        data-bs-target="#CreateAccount">Create Account</button>
                 </div>
             </form>
         </div>
     </div>
+
+
+
+
+    <div class="modal fade" id="CreateAccount" tabindex="-1" aria-labelledby="CreateAccountLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white-50">
+                    <h5 class="modal-title" id="CreateAccountLabel">Create Account</h5>
+                </div>
+                <div class="modal-body bg-success">
+                    <form class="needs-validation" novalidate>
+                        <div>
+                            <div class="mb-2">
+                                <label for="UserNameInput" class="form-label text-white">Username</label>
+                                <input type="text" class="form-control" id="UserNameInput"
+                                    [(ngModel)]="this.UserData[0].Username" placeholder="Username" name="CreateUsername"
+                                    #UserNameInput="ngModel" required />
+                                <div *ngIf="UserNameInput.invalid && (UserNameInput.dirty || UserNameInput.touched)"
+                                    class="alert text-red">
+                                    <div *ngIf="UserNameInput.errors?.required">
+                                        Invalid Username
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="PasswordInput" class="form-label text-white">Password</label>
+                                <input type="Password" class="form-control" id="PasswordInput"
+                                    [(ngModel)]="this.UserData[0].Password" placeholder="Your password"
+                                    name="CreatePassword" #PasswordInput="ngModel" required minlength="6" />
+                                <div *ngIf="PasswordInput.invalid && (PasswordInput.dirty || PasswordInput.touched)"
+                                    class="alert text-danger">
+                                    <div *ngIf="PasswordInput.errors?.required">
+                                        Invalid Password
+                                    </div>
+                                    <div *ngif="PasswordInput.errors?.minlength">
+                                        Password needs atleast 6 characters
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="PasswordRepeat" class="form-label text-white">Repeat Password</label>
+                                <input type="Password" class="form-control" id="PasswordRepeatInput"
+                                    [(ngModel)]="this.UserData[0].RepeatPassword" placeholder="Repeat password"
+                                    name="CreateRepeatPassword" #PasswordRepeatInput="ngModel" required/>
+                                <div *ngIf="PasswordRepeatInput.invalid && (PasswordRepeatInput.dirty || PasswordRepeatInput.touched)"
+                                    class="alert text-red">
+                                    <div *ngIf="PasswordInput.errors?.required">
+                                        Password does not match
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <label for="EmailInput" class="form-label text-white">E-mail</label>
+                                <input type="text" class="form-control" id="EmailInput"
+                                    [(ngModel)]="this.UserData[0].Email" placeholder="E-mail" name="CreateEmail"
+                                    #EmailInput="ngModel" required email />
+                                <div *ngIf="EmailInput.invalid && (EmailInput.dirty || EmailInput.touched)"
+                                    class="alert text-red">
+                                    <div *ngIf="EmailInput.errors?.required">
+                                        invalid E-mail
+                                    </div>
+                                    <div *ngif="EmailInput.errors?.email">
+                                        invalid E-mail
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success" (click)="CreateAccount();">Save Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
