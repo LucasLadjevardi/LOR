@@ -1,71 +1,33 @@
-<div class="container bg-gradient-linear">
+<div class="container-fluid ">
     <div class="container">
-        <div class="row d-md-flex justify-content-center align-items-center">
-            <div class="col-sm-3 mb-5"><p></p></div>
-            <div class="w-100"></div>
-            <div style="font-family: zero_velocity_brkregular;">
-                <p class="text-center display-3">LOR</p>
-            </div>
-            <div class="col-sm-3 p-3 mt-4 bg-darkgreen bg-gradient">
-                <div class="mt-3 mb-4">
-                    <label style="font-family: zero_velocity_brkregular;" for="formGroupExampleInput" class="form-label pb-2">Username</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="UserData[1]" placeholder="Username" />
-                    <label style="font-family: zero_velocity_brkregular;" for="formGroupExampleInput" class="form-label pb-2 pt-3">Password</label>
-                    <input type="Password" class="form-control" id="formGroupExampleInput" [(ngModel)]="UserData[2]" placeholder="Password" />
-                    <div class="form-check mt-3 ">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">Remember Me</label>
-                      </div>
-                    <div class="d-flex p-1 mt-1 justify-content-center">
-                        <button type="button" class="btn btn-sm btn-outline-dark text-black w-100" (click)="AccountLogin()">Login</button>
-                    </div>
-                    <div class="d-flex p-1 justify-content-center">
-                        <button type="button" class="btn btn-sm btn-outline-dark text-black w-100" data-bs-toggle="modal"
-                        data-bs-target="#LoginModal">Create Account</button>
+        <div class="row d-md-flex justify-content-center">
+            <form class="col-sm-3 bg-darkgreen bg-gradient needs-validation" novalidate>
+                <div class="mb-3 mt-3">
+                    <h5 class="text-center">LOR</h5>
+                </div>
+                <div class="mb-3">
+                    <label for="InputUsername" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="InputUsername" placeholder="Username" required>
+                    <div class="invalid-feedback">
+                        Please write a Username
                     </div>
                 </div>
-            </div>
-            <div class="w-100"></div>
-            <div class="col-sm-3 text-center">
-                <a class="text-dark" href="*" data-bs-toggle="modal"
-                data-bs-target="#LoginHelp">Need help logging in?</a>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-dark text-white-50">
-                    <h5 class="modal-title" id="LoginModalLabel">Create Account</h5>
+                <div class="mb-3">
+                    <label for="InputPassword" class="form-label">Password</label>
+                    <input type="text" class="form-control" id="InputPassword" placeholder="Password" required>
+                    <div class="invalid-feedback">
+                        Please write a Password
+                    </div>
                 </div>
-                <div class="modal-body bg-success">
-                    <form id="FormModal">
-                        <div class="p-1">
-                            <label for="UserNameInput" class="form-label text-white">Username</label>
-                            <input type="text" class="form-control" id="UserNameInput" [(ngModel)]="UserData[1]" placeholder="Username" required/>
-                        </div>
-                        <div class="p-1">
-                            <label for="PasswordInput"  class="form-label text-white">Password</label>
-                            <input type="Password" class="form-control" id="PasswordInput" [(ngModel)]="UserData[2]" placeholder="Your password" required/>
-                        </div>
-                        <div class="p-1">
-                            <label for="PasswordRepeat" class="form-label text-white">Repeat Password</label>
-                            <input type="Password" class="form-control" id="PasswordRepeat" [(ngModel)]="UserData[3]" placeholder="Repeat password" required/>
-                        </div>
-                        <div class="p-1">
-                            <label for="EmailInput"  class="form-label text-white">E-mail</label>
-                            <input type="text" class="form-control" id="EmailInput" [(ngModel)]="UserData[4]" placeholder="E-mail" required/>
-                        </div>
-                        <div class="modal-footer bg-dark">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success" (click)="CreateAccount(UserData);">Save Account</button>
-                        </div>
-                    </form>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="RememberMe">
+                    <label class="form-check-label text-white" for="RememberMe">Remember me</label>
                 </div>
-            </div>
+                <div class="mb-3">
+                    <button class="btn btn-outline-dark text-white m-1" type="submit" (click)="CreateAccount()">Login</button>
+                    <button class="btn btn-outline-dark text-white m-1" type="button">Create Account</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-
