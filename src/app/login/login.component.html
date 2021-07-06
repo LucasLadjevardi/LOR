@@ -53,7 +53,7 @@
                 <div class="modal-body bg-success">
                     <form class="needs-validation" novalidate>
                         <div>
-                            <div class="mb-2">
+                            <div>
                                 <label for="UserNameInput" class="form-label text-white">Username</label>
                                 <input type="text" class="form-control" id="UserNameInput"
                                     [(ngModel)]="this.UserData[0].Username" placeholder="Username" name="CreateUsername"
@@ -75,7 +75,7 @@
                                     <div *ngIf="PasswordInput.errors?.required">
                                         Invalid Password
                                     </div>
-                                    <div *ngif="PasswordInput.errors?.minlength">
+                                    <div *ngIf="PasswordInput.errors?.minlength">
                                         Password needs atleast 6 characters
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@
                                     name="CreateRepeatPassword" #PasswordRepeatInput="ngModel" required/>
                                 <div *ngIf="PasswordRepeatInput.invalid && (PasswordRepeatInput.dirty || PasswordRepeatInput.touched)"
                                     class="alert text-red">
-                                    <div *ngIf="PasswordInput.errors?.required">
+                                    <div *ngIf="">
                                         Password does not match
                                     </div>
                                 </div>
@@ -102,13 +102,11 @@
                                     <div *ngIf="EmailInput.errors?.required">
                                         invalid E-mail
                                     </div>
-                                    <div *ngif="EmailInput.errors?.email">
+                                    <div *ngIf="EmailInput.errors?.email">
                                         invalid E-mail
                                     </div>
-                                   
                                 </div>
                             </div>
-                            
                         </div>
                     </form>
                 </div>
