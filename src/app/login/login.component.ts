@@ -107,7 +107,7 @@ export class LoginComponent implements OnInit {
     } 
     else
     {
-      
+      this.PasswordMatching(false)
     }
   }
 
@@ -121,8 +121,8 @@ export class LoginComponent implements OnInit {
       })
   }
 
-  PasswordMatching(){
-    if(this.UserData[0].Password == this.UserData[0].RepeatPassword){
+  PasswordMatching(Matching:boolean){
+    /*if(this.UserData[0].Password == this.UserData[0].RepeatPassword){
       console.log(this.UserData[0].Password + " " + this.UserData[0].RepeatPassword);
       this._LoginService.PasswordMatches.next(true);
       console.log(this._LoginService.PasswordMatches.next(true));
@@ -130,7 +130,7 @@ export class LoginComponent implements OnInit {
     else{
       this._LoginService.PasswordMatches.next(false);
       console.log(this._LoginService.PasswordMatches.next(false));
-    }
+    }*/
   }
 
   static IsUsernameTaken(request:boolean)

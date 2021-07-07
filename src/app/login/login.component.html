@@ -92,7 +92,7 @@
                                         name="CreateRepeatPassword" #PasswordRepeatInput="ngModel" required />
                                     <div *ngIf="PasswordRepeatInput.invalid && (PasswordRepeatInput.dirty || PasswordRepeatInput.touched)"
                                         class="alert text-red">
-                                        <div *ngIf="">
+                                        <div *ngIf="PasswordMatching()">
                                             Password does not match
                                         </div>
                                     </div>
