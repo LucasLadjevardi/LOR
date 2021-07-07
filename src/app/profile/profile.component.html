@@ -1,38 +1,83 @@
-<div class="container-fluid"> 
-    <button type="button" class="btn btn-sm btn-outline-dark text-white-50" id="EditAccoun" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Account</button>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-dark text-white-50">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Account</h5>
-                </div>
-                <div class="modal-body bg-success">
-                    <div class="p-1">
-                        <label for="formGroupExampleInput"  class="form-label text-white">Username</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="UserName" placeholder="Edit your username"/>
-                    </div>
-                    <div class="p-1">
-                        <label for="formGroupExampleInput"  class="form-label text-white">Old Password</label>
-                        <input type="Password" class="form-control" id="formGroupExampleInput" [(ngModel)]="OldPassword" placeholder="Input your old password" />
-                    </div>
-                    <div class="p-1">
-                        <label for="formGroupExampleInput" class="form-label text-white">New Password</label>
-                        <input type="Password" class="form-control" id="formGroupExampleInput" [(ngModel)]="NewPassword" placeholder="Input your new password" />
-                    </div>
-                    <div class="p-1">
-                        <label for="formGroupExampleInput" class="form-label text-white">Repeat your new Password</label>
-                        <input type="Password" class="form-control" id="formGroupExampleInput" [(ngModel)]="RepeatNewPassword" placeholder="Repeat your new password" />
-                    </div>
-                    <div class="p-1">
-                        <label for="formGroupExampleInput"  class="form-label text-white">E-mail</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="Email" placeholder="Edit your E-mail" />
-                    </div>
-                    
-                </div>
-                <div class="modal-footer bg-dark">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="routingtohmoe();">Close</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="EditAccount();">Save Edit</button>
-                </div>
-            </div>
+<div class="container-fluid ">
+    <div class="container">
+        <div class="p-5">
+            <p></p>
         </div>
+        <div class="row d-md-flex justify-content-center">
+            <form class="col-sm-3 bg-darkgreen bg-gradient needs-validation" novalidate>
+                <div class="mb-3 mt-3">
+                    <h5 class="text-center">Edit Account</h5>
+                </div>
+                <div class="mb-3">
+                    <div>
+                        <div>
+                            <label for="UserNameInput" class="form-label text-white">Username</label>
+                            <input type="text" class="form-control" id="UserNameInput"
+                                [(ngModel)]="this.UserData[0].Username" placeholder="Username" name="CreateUsername"
+                                #UserNameInput="ngModel" required />
+                            <div *ngIf="UserNameInput.invalid && (UserNameInput.dirty || UserNameInput.touched)"
+                                class="alert text-red">
+                                <div *ngIf="UserNameInput.errors?.required">
+                                    Invalid Username
+                                </div>
+                            </div>
+                            <div *ngIf="(this._LoginService.TakenUsername  | async)">
+                                <p class="warning-text">Username is Taken</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <label for="PasswordInput" class="form-label text-white">Password</label>
+                                <input type="Password" class="form-control" id="PasswordInput"
+                                    [(ngModel)]="this.UserData[0].Password" placeholder="Your password"
+                                    name="CreatePassword" #PasswordInput="ngModel" required minlength="6" />
+                                <div *ngIf="PasswordInput.invalid && (PasswordInput.dirty || PasswordInput.touched)"
+                                    class="alert text-danger">
+                                    <div *ngIf="PasswordInput.errors?.required">
+                                        Invalid Password
+                                    </div>
+                                    <div *ngIf="PasswordInput.errors?.minlength">
+                                        Password needs atleast 6 characters
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="PasswordRepeat" class="form-label text-white">Repeat Password</label>
+                                <input type="Password" class="form-control" id="PasswordRepeatInput"
+                                    [(ngModel)]="this.UserData[0].RepeatPassword" placeholder="Repeat password"
+                                    name="CreateRepeatPassword" #PasswordRepeatInput="ngModel" required />
+                                <div *ngIf="PasswordRepeatInput.invalid && (PasswordRepeatInput.dirty || PasswordRepeatInput.touched)"
+                                    class="alert text-red">
+                                    <div *ngIf="PasswordRepeatInput != PasswordInput">
+                                        Password does not match
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="EmailInput" class="form-label text-white">E-mail</label>
+                            <input type="text" class="form-control" id="EmailInput"
+                                [(ngModel)]="this.UserData[0].Email" placeholder="E-mail" name="CreateEmail"
+                                #EmailInput="ngModel" required email />
+                            <div *ngIf="EmailInput.invalid && (EmailInput.dirty || EmailInput.touched)"
+                                class="alert text-red">
+                                <div *ngIf="EmailInput.errors?.required">
+                                    invalid E-mail
+                                </div>
+                                <div *ngIf="EmailInput.errors?.email">
+                                    invalid E-mail
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-outline-dark text-white m-1" type="submit"
+                        (click)="EditAccount()">Login</button>
+                    <button class="btn btn-outline-dark text-white m-1" type="button" data-bs-toggle="modal"
+                        data-bs-target="#CreateAccount">Create Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

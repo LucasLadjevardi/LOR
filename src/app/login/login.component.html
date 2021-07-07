@@ -33,6 +33,7 @@
                 </div>
                 <div class="mb-3">
                     <button class="btn btn-outline-dark text-white m-1" type="submit"
+                        [disabled]="InputPassword.errors?.required || InputUsername.errors?.required"
                         (click)="AccountLogin()">Login</button>
                     <button class="btn btn-outline-dark text-white m-1" type="button" data-bs-toggle="modal"
                         data-bs-target="#CreateAccount">Create Account</button>
@@ -63,13 +64,12 @@
                                     <div *ngIf="UserNameInput.errors?.required">
                                         Invalid Username
                                     </div>
-                                    <div *ngIf?="(this.TakeingUserName | async) == true">
-                                        Username is takeing
-                                    </div>
+                                </div>
+                                <div *ngIf="(this._LoginService.TakenUsername  | async)">
+                                    <p class="warning-text">Username is Taken</p>
                                 </div>
                             </div>
                             <div>
-<<<<<<< HEAD
                                 <div>
                                     <label for="PasswordInput" class="form-label text-white">Password</label>
                                     <input type="Password" class="form-control" id="PasswordInput"
@@ -92,34 +92,9 @@
                                         name="CreateRepeatPassword" #PasswordRepeatInput="ngModel" required />
                                     <div *ngIf="PasswordRepeatInput.invalid && (PasswordRepeatInput.dirty || PasswordRepeatInput.touched)"
                                         class="alert text-red">
-                                        <div *ngIf="PasswordRepeatInput != PasswordInput">
+                                        <div *ngIf="">
                                             Password does not match
                                         </div>
-=======
-                                <label for="PasswordInput" class="form-label text-white">Password</label>
-                                <input type="Password" class="form-control" id="PasswordInput"
-                                    [(ngModel)]="this.UserData[0].Password" placeholder="Your password"
-                                    name="CreatePassword" #PasswordInput="ngModel" required minlength="6" />
-                                <div *ngIf="PasswordInput.invalid && (PasswordInput.dirty || PasswordInput.touched)"
-                                    class="alert text-danger">
-                                    <div *ngIf="PasswordInput.errors?.required">
-                                        Invalid Password
-                                    </div>
-                                    <div *ngIf="PasswordInput.errors?.minlength">
-                                        Password needs atleast 6 characters
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label for="PasswordRepeat" class="form-label text-white">Repeat Password</label>
-                                <input type="Password" class="form-control" id="PasswordRepeatInput"
-                                    [(ngModel)]="this.UserData[0].RepeatPassword" placeholder="Repeat password"
-                                    name="CreateRepeatPassword" #PasswordRepeatInput="ngModel" required/>
-                                <div *ngIf="PasswordRepeatInput.invalid && (PasswordRepeatInput.dirty || PasswordRepeatInput.touched)"
-                                    class="alert text-red">
-                                    <div *ngIf="">
-                                        Password does not match
->>>>>>> ad2aae48e3d2b9b2d3e0df24f64191c1f72bcdeb
                                     </div>
                                 </div>
                             </div>
@@ -136,19 +111,16 @@
                                     <div *ngIf="EmailInput.errors?.email">
                                         invalid E-mail
                                     </div>
-<<<<<<< HEAD
                                 </div>
                             </div>
-=======
-                                </div>
-                            </div>
->>>>>>> ad2aae48e3d2b9b2d3e0df24f64191c1f72bcdeb
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer bg-dark">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success" (click)="CreateAccount();">Save Account</button>
+                    <button type="submit" class="btn btn-success"
+                        [disabled]="EmailInput.errors?.required ||  EmailInput.errors?.email ||  PasswordRepeatInput.errors?.required ||  PasswordInput.errors?.required ||  PasswordInput.errors?.minlength ||  UserNameInput.errors?.required || PasswordRepeatInput == PasswordInput"
+                        (click)="CreateAccount();">Save Account</button>
                 </div>
             </div>
         </div>

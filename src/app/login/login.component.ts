@@ -17,8 +17,6 @@ export class LoginComponent implements OnInit {
 
   LoginForm?: FormGroup;
 
-  TakeingUserName:boolean = false;
-
   public UserData = [{
     id: 0,
     Username: '',
@@ -27,16 +25,19 @@ export class LoginComponent implements OnInit {
     Email: '',
     Role: 'User'
   }];
+  static LoginService: any;
 
-  constructor(private _router: Router, private _LoginService: LoginService) {
+  constructor(private _router: Router, public _LoginService: LoginService) {
   }
 
   get LoginUserNameControl() { return this.LoginForm?.get('UserNameControl') }
 
   ngOnInit(): void {
-    this.TakeingUserName = LoginService.TakeingUserName;
+    this._LoginService.TakenUsername.subscribe();
     this._LoginService.IsLogged.subscribe();
-    this.ValidatingLogin();
+    LoginComponent.LoginService = this._LoginService.TakenUsernameBehavior;
+    
+    //this.ValidatingLogin();
   }
 
 
@@ -52,7 +53,6 @@ export class LoginComponent implements OnInit {
       "error": function (jqXHR: { status: number; }, exception: any) {
         if (jqXHR.status == 404) {
           console.log(exception)
-          LoginService.TakeingUserName=true;
         }
         else if (jqXHR.status == 400) {
           console.log(exception)
@@ -79,6 +79,7 @@ export class LoginComponent implements OnInit {
   }
 
   CreateAccount() {
+    console.log(this._LoginService.TakenUsernameBehavior);
     if (this.UserData[0].Password == this.UserData[0].RepeatPassword) {
       $.ajax({
         url: "http://192.168.4.110:48935/api/Users",
@@ -94,12 +95,19 @@ export class LoginComponent implements OnInit {
         }),
         "error": function (jqXHR: { status: number; }, exception: any) {
           if (jqXHR.status == 400) {
-            console.log(exception)
+            LoginComponent.IsUsernameTaken(true);
+          }
+          else if(jqXHR.status == 500){
+            LoginComponent.IsUsernameTaken(true);
           }
         },
         contentType: "application/json; charset=utf-8",
       });
       console.log(this.UserData);
+    } 
+    else
+    {
+      
     }
   }
 
@@ -112,5 +120,23 @@ export class LoginComponent implements OnInit {
           ])
       })
   }
+
+  PasswordMatching(){
+    if(this.UserData[0].Password == this.UserData[0].RepeatPassword){
+      console.log(this.UserData[0].Password + " " + this.UserData[0].RepeatPassword);
+      this._LoginService.PasswordMatches.next(true);
+      console.log(this._LoginService.PasswordMatches.next(true));
+    }
+    else{
+      this._LoginService.PasswordMatches.next(false);
+      console.log(this._LoginService.PasswordMatches.next(false));
+    }
+  }
+
+  static IsUsernameTaken(request:boolean)
+  {
+    LoginComponent.LoginService.next(request);
+  }
+
 }
 

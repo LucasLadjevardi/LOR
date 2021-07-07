@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import { LoginService } from '../service/login.service';
 
 @Component({
   selector: 'app-profile',
@@ -8,25 +9,24 @@ import {Router} from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-  public UserName ="";
-  public OldPassword="";
-  public NewPassword="";
-  public RepeatNewPassword="";
-  public RepeatPassword="";
-  public Email="";
+  public UserData = [{
+    id: 0,
+    Username: '',
+    Password: '',
+    RepeatPassword: '',
+    Email: '',
+    Role: 'User'
+  }];
 
-  constructor(private _router: Router) { }
+  constructor(private _router: Router,public _LoginService: LoginService) { }
 
   ngOnInit(): void {
-    const btn = document.getElementById("EditAccoun")?.click()
+    this._LoginService.TakenUsername.subscribe();
   }
 
   EditAccount(){
-    if(this.OldPassword!=this.NewPassword && this.NewPassword == this.RepeatNewPassword)
-    {
       //lave et api call hvor du tilføj de nyt data
       this._router.navigate(['/home']);
-    }
   };
 
   routingtohmoe(){
