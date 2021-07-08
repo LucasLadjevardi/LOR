@@ -10,7 +10,7 @@ import { StoreComponent } from './store/store.component';
 import { AboutComponent } from './about/about.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FooterComponent } from './footer/footer.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from './service/login.service';
 
 @NgModule({
@@ -27,7 +27,8 @@ import { LoginService } from './service/login.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [ 
     NavbarComponent,

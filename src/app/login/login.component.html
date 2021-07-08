@@ -1,29 +1,30 @@
 <div class="container-fluid ">
     <div class="container">
         <div class="row d-md-flex justify-content-center">
-            <form class="col-sm-3 bg-darkgreen bg-gradient needs-validation" novalidate>
+            <form class="col-sm-3 bg-darkgreen bg-gradient needs-validation" [formGroup]="LoginForm" novalidate>
                 <div class="mb-3 mt-3">
                     <h5 class="text-center">LOR</h5>
                 </div>
                 <div class="mb-3">
                     <label for="InputUsername" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="InputUsername" [(ngModel)]="UserData[0].Username"
-                        name="InputUsername" placeholder="Username" #InputUsername="ngModel" required>
-                    <div *ngIf="InputUsername.invalid && (InputUsername.dirty || InputUsername.touched)"
-                        class="alert text-red">
-                        <div *ngIf="InputUsername.errors?.required">
-                            Username is required.
+                    <input type="text" class="form-control" id="InputUsername" formControlName="Username"
+                        name="InputUsername" placeholder="Username" required>
+                    <div *ngIf="Username?.invalid && (Username?.dirty || Username?.touched)" class="alert text-danger">
+                        <div *ngIf="Username?.errors?.required">
+                            Invalid Username
                         </div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="InputPassword" class="form-label">Password</label>
-                    <input type="Password" class="form-control" id="InputPassword" [(ngModel)]="UserData[0].Password"
-                        name="InputPassword" placeholder="Password" #InputPassword="ngModel" required>
-                    <div *ngIf="InputPassword.invalid && (InputPassword.dirty || InputPassword.touched)"
-                        class="alert text-red">
-                        <div *ngIf="InputPassword.errors?.required">
-                            Password is required.
+                    <input type="Password" class="form-control" id="InputPassword" formControlName="Password"
+                        name="InputPassword" placeholder="Password" required>
+                    <div *ngIf="Password?.invalid && (Password?.dirty || Password?.touched)" class="alert text-danger">
+                        <div *ngIf="Password?.errors?.required">
+                            Invalid Password
+                        </div>
+                        <div *ngIf="Password?.errors?.minlength">
+                            Password needs atleast 6 characters
                         </div>
                     </div>
                 </div>
@@ -32,9 +33,7 @@
                     <label class="form-check-label text-white" for="RememberMe">Remember me</label>
                 </div>
                 <div class="mb-3">
-                    <button class="btn btn-outline-dark text-white m-1" type="submit"
-                        [disabled]="InputPassword.errors?.required || InputUsername.errors?.required"
-                        (click)="AccountLogin()">Login</button>
+                    <button class="btn btn-outline-dark text-white m-1" type="submit" (click)="Login()">Login</button>
                     <button class="btn btn-outline-dark text-white m-1" type="button" data-bs-toggle="modal"
                         data-bs-target="#CreateAccount">Create Account</button>
                 </div>
@@ -42,88 +41,69 @@
         </div>
     </div>
 
+    <!-- <form [formGroup]="LoginForm">
+
+        <div>
+            <label for="CreateAccount"></label>
+            <input type="text" id="CreateAccount" formControlName="Username">
+        </div>
+
+        <button (click)="CreateAccount()">
+        </button>
+    </form> -->
+
+</div>
 
 
-
-    <div class="modal fade" id="CreateAccount" tabindex="-1" aria-labelledby="CreateAccountLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-dark text-white-50">
-                    <h5 class="modal-title" id="CreateAccountLabel">Create Account</h5>
-                </div>
-                <div class="modal-body bg-success">
-                    <form class="needs-validation" novalidate>
-                        <div>
-                            <div>
-                                <label for="UserNameInput" class="form-label text-white">Username</label>
-                                <input type="text" class="form-control" id="UserNameInput"
-                                    [(ngModel)]="this.UserData[0].Username" placeholder="Username" name="CreateUsername"
-                                    #UserNameInput="ngModel" required />
-                                <div *ngIf="UserNameInput.invalid && (UserNameInput.dirty || UserNameInput.touched)"
-                                    class="alert text-red">
-                                    <div *ngIf="UserNameInput.errors?.required">
-                                        Invalid Username
-                                    </div>
-                                </div>
-                                <div *ngIf="(this._LoginService.TakenUsername  | async)">
-                                    <p class="warning-text">Username is Taken</p>
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <label for="PasswordInput" class="form-label text-white">Password</label>
-                                    <input type="Password" class="form-control" id="PasswordInput"
-                                        [(ngModel)]="this.UserData[0].Password" placeholder="Your password"
-                                        name="CreatePassword" #PasswordInput="ngModel" required minlength="6" />
-                                    <div *ngIf="PasswordInput.invalid && (PasswordInput.dirty || PasswordInput.touched)"
-                                        class="alert text-danger">
-                                        <div *ngIf="PasswordInput.errors?.required">
-                                            Invalid Password
-                                        </div>
-                                        <div *ngIf="PasswordInput.errors?.minlength">
-                                            Password needs atleast 6 characters
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label for="PasswordRepeat" class="form-label text-white">Repeat Password</label>
-                                    <input type="Password" class="form-control" id="PasswordRepeatInput"
-                                        [(ngModel)]="this.UserData[0].RepeatPassword" placeholder="Repeat password"
-                                        name="CreateRepeatPassword" #PasswordRepeatInput="ngModel" required />
-                                    <div *ngIf="PasswordRepeatInput.invalid && (PasswordRepeatInput.dirty || PasswordRepeatInput.touched)"
-                                        class="alert text-red">
-                                        <div *ngIf="PasswordMatching()">
-                                            Password does not match
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-2">
-                                <label for="EmailInput" class="form-label text-white">E-mail</label>
-                                <input type="text" class="form-control" id="EmailInput"
-                                    [(ngModel)]="this.UserData[0].Email" placeholder="E-mail" name="CreateEmail"
-                                    #EmailInput="ngModel" required email />
-                                <div *ngIf="EmailInput.invalid && (EmailInput.dirty || EmailInput.touched)"
-                                    class="alert text-red">
-                                    <div *ngIf="EmailInput.errors?.required">
-                                        invalid E-mail
-                                    </div>
-                                    <div *ngIf="EmailInput.errors?.email">
-                                        invalid E-mail
-                                    </div>
-                                </div>
+<div class="modal fade" id="CreateAccount" tabindex="-1" aria-labelledby="CreateAccountLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white-50">
+                <h5 class="modal-title" id="CreateAccountLabel">Create Account</h5>
+            </div>
+            <div class="modal-body bg-success">
+                <form class="needs-validation" [formGroup]="LoginForm" novalidate>
+                    <div class="mb-3">
+                        <label for="CreateUsername" class="form-label text-white">Username</label>
+                        <input type="text" class="form-control" id="CreateAccount" formControlName="Username" required>
+                        <div *ngIf="Username?.invalid && (Username?.dirty || Username?.touched)"
+                            class="alert text-danger">
+                            <div *ngIf="Username?.errors?.required">
+                                Invalid Username
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer bg-dark">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success"
-                        [disabled]="EmailInput.errors?.required ||  EmailInput.errors?.email ||  PasswordRepeatInput.errors?.required ||  PasswordInput.errors?.required ||  PasswordInput.errors?.minlength ||  UserNameInput.errors?.required || PasswordRepeatInput == PasswordInput"
-                        (click)="CreateAccount();">Save Account</button>
-                </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="CreatePassword" class="form-label text-white">Password</label>
+                        <input type="password" class="form-control" formControlName="Password" required>
+                        <div *ngIf="Password?.invalid && (Password?.dirty || Password?.touched)"
+                            class="alert text-danger">
+                            <div *ngIf="Password?.errors?.required">
+                                Invalid Password
+                            </div>
+                            <div *ngIf="Password?.errors?.minlength">
+                                Password needs atleast 6 characters
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="CreateEmail" class="form-label text-white">Email</label>
+                        <input type="text" class="form-control" formControlName="Email" required>
+                        <div *ngIf="Email?.invalid && (Email?.dirty || Email?.touched)" class="alert text-danger">
+                            <div *ngIf="Email?.errors?.required">
+                                Invalid email
+                            </div>
+                            <div *ngIf="Email?.errors?.email">
+                                Invalid email
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer bg-dark">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success" (click)="CreateAccount()">Save Account</button>
             </div>
         </div>
     </div>
-
 </div>
