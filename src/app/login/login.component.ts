@@ -18,15 +18,6 @@ export class LoginComponent implements OnInit {
 
   LoginForm: FormGroup = new FormGroup({});
 
-  public UserData = [{
-    id: 0,
-    Username: '',
-    Password: '',
-    RepeatPassword: '',
-    Email: '',
-    Role: 'User'
-  }];
-
   constructor(private _router: Router, public _LoginService: LoginService, private fb: FormBuilder) {
   }
 
@@ -55,12 +46,64 @@ export class LoginComponent implements OnInit {
   }
 
   CreateAccount(): void {
-    console.log(this.LoginForm.value);
-    //this.LoginForm.controls.Username
+      $.ajax({
+        url: "http://192.168.4.110:48935/api/Users",
+        type: "POST",
+        async: true,
+        crossDomain: true,
+        dataType: "json",
+        data: JSON.stringify({
+          "username": this.LoginForm.value.Username,
+          "password": this.LoginForm.value.Password,
+          "email": this.LoginForm.value.Email,
+          "role": "User"
+        }),
+        "error": function (jqXHR: { status: number; }, exception: any) {
+          if (jqXHR.status == 400) {
+            alert('wrong');
+          }
+          else if(jqXHR.status == 500){
+            alert('wrong');
+          }
+        },
+        contentType: "application/json; charset=utf-8",
+      });
+      console.log(this.LoginForm.value.Username);
   }
 
   Login() {
-    this._router.navigate(['/profile']);
+    let token;
+    var UID = "UserID";
+    var LT;
+    $.ajax({
+      url: "http://192.168.4.110:48935/api/Users/Login",
+      type: "POST",
+      async: true,
+      headers: {
+        "Authorization": localStorage.getItem('token')
+      },
+      crossDomain: true,
+      dataType: "json",
+      data: JSON.stringify({
+        "username": this.LoginForm.value.Username,
+        "password": this.LoginForm.value.Password,
+      }),
+      "error": function (jqXHR: { status: number; }, exception: any) {
+        if (jqXHR.status == 400) {
+          alert('wrong');
+        }
+        else if(jqXHR.status == 500){
+          alert('wrong');
+        }
+      },
+      success: function(data) {
+        token = data;
+        localStorage.setItem(UID, token);
+        LT = localStorage.UserID;
+        console.log(LT);
+      },
+      contentType: "application/json; charset=utf-8",
+    });
   }
 
 }
