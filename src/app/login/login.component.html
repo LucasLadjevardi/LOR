@@ -40,18 +40,6 @@
             </form>
         </div>
     </div>
-
-    <!-- <form [formGroup]="LoginForm">
-
-        <div>
-            <label for="CreateAccount"></label>
-            <input type="text" id="CreateAccount" formControlName="Username">
-        </div>
-
-        <button (click)="CreateAccount()">
-        </button>
-    </form> -->
-
 </div>
 
 
@@ -65,7 +53,7 @@
                 <form class="needs-validation" [formGroup]="LoginForm" novalidate>
                     <div class="mb-3">
                         <label for="CreateUsername" class="form-label text-white">Username</label>
-                        <input type="text" class="form-control" id="CreateAccount" formControlName="Username" required>
+                        <input type="text" class="form-control" id="CreateAccount" formControlName="Username" placeholder="Username" required>
                         <div *ngIf="Username?.invalid && (Username?.dirty || Username?.touched)"
                             class="alert text-danger">
                             <div *ngIf="Username?.errors?.required">
@@ -75,7 +63,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="CreatePassword" class="form-label text-white">Password</label>
-                        <input type="password" class="form-control" formControlName="Password" required>
+                        <input type="password" class="form-control" formControlName="Password" placeholder="Password" required>
                         <div *ngIf="Password?.invalid && (Password?.dirty || Password?.touched)"
                             class="alert text-danger">
                             <div *ngIf="Password?.errors?.required">
@@ -88,7 +76,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="CreateEmail" class="form-label text-white">Email</label>
-                        <input type="text" class="form-control" formControlName="Email" required>
+                        <input type="text" class="form-control" formControlName="Email" placeholder="Email" required>
                         <div *ngIf="Email?.invalid && (Email?.dirty || Email?.touched)" class="alert text-danger">
                             <div *ngIf="Email?.errors?.required">
                                 Invalid email

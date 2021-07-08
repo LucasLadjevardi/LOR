@@ -6,7 +6,7 @@ import * as $ from 'jquery';
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import { style } from '@angular/animations';
-import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormBuilder, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
