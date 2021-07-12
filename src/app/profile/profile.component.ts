@@ -29,6 +29,9 @@ export class ProfileComponent implements OnInit {
   constructor(private _router: Router,public _LoginService: LoginService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    if (!this._LoginService.ProfileBehavior.value) {
+      this._router.navigate(['/home'])
+    }
     this._LoginService.TakenUsername.subscribe();
     this.initializeForm();
   }
@@ -45,8 +48,33 @@ export class ProfileComponent implements OnInit {
   }
 
   EditAccount(){
-      //lave et api call hvor du tilføj nyt data til bruger
-      this._router.navigate(['/home']);
+    var router = this._router;
+    var settings = {
+      url: "http://192.168.4.110:48935/api/Users/",
+      type: "put",
+      async: true,
+      crossDomain: true,
+      dataType: "json",
+      data: JSON.stringify({
+        "username": this.EditForm.value.Username,
+        "password": this.EditForm.value.NewPassword,
+        "email": this.EditForm.value.Email,
+      }),
+      "error": function (jqXHR: { status: number; }, exception: any) {
+        if (jqXHR.status = 400) {
+          alert('wrong');
+        }
+
+        else if (jqXHR.status = 500) {
+          alert('Looks like we are having issues with our servers, try again later');
+        }
+
+      },
+      contentType: "application/json; charset=utf-8"
+    }
+    $.ajax(settings).done(function (data) {
+      router.navigate(['/home']);
+    });
   };
 
   routingtohmoe(){
