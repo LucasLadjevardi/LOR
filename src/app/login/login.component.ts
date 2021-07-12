@@ -7,31 +7,29 @@ import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import { style } from '@angular/animations';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormBuilder, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
-
   LoginForm: FormGroup = new FormGroup({});
-
+  
   constructor(private _router: Router, public _LoginService: LoginService, private fb: FormBuilder) {
   }
-
+  
   get Username() { return this.LoginForm.get('Username'); }
   get Password() { return this.LoginForm.get('Password'); }
   get Email() { return this.LoginForm.get('Email'); }
-
   ngOnInit(): void {
     this._LoginService.IsLogged.subscribe();
     this.initializeForm();
-    console.log(this.LoginForm.controls);
-
+    console.log(localStorage)
   }
-
 
   initializeForm(): void {
     this.LoginForm = this.fb.group({
@@ -41,8 +39,6 @@ export class LoginComponent implements OnInit {
       Email: ['', [Validators.required,Validators.email]],
       Role: 'User'
     });
-    console.log(this.LoginForm.value);
-
   }
 
   CreateAccount(): void {
@@ -72,9 +68,6 @@ export class LoginComponent implements OnInit {
   }
 
   Login() {
-    let token;
-    var UID = "UserID";
-    var LT;
     $.ajax({
       url: "http://192.168.4.110:48935/api/Users/Login",
       type: "POST",
@@ -92,20 +85,11 @@ export class LoginComponent implements OnInit {
         if (jqXHR.status == 400) {
           alert('wrong');
         }
-        else if(jqXHR.status == 500){
-          alert('wrong');
-        }
       },
       success: function(data) {
-        token = data;
-        localStorage.setItem(UID, token);
-        LT = localStorage.UserID;
-        console.log(LT);
+        localStorage.setItem('token', data)
       },
       contentType: "application/json; charset=utf-8",
     });
   }
-
 }
-
-
