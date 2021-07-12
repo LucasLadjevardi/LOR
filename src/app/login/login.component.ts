@@ -6,7 +6,7 @@ import * as $ from 'jquery';
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import { style } from '@angular/animations';
-import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormBuilder} from '@angular/forms';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormBuilder, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -15,11 +15,9 @@ import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormBuilder} f
 })
 export class LoginComponent implements OnInit {
 
-
   LoginForm: FormGroup = new FormGroup({});
 
-  constructor(private _router: Router, public _LoginService: LoginService, private fb: FormBuilder) {
-  }
+  constructor(private _router: Router, public _LoginService: LoginService, private fb: FormBuilder) { }
 
   get Username() { return this.LoginForm.get('Username'); }
   get Password() { return this.LoginForm.get('Password'); }
@@ -27,9 +25,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this._LoginService.IsLogged.subscribe();
+    this._LoginService.TakenUsername.subscribe();
     this.initializeForm();
-    console.log(this.LoginForm.controls);
-
+    this.formControlValueChanged();
   }
 
 
@@ -38,44 +36,54 @@ export class LoginComponent implements OnInit {
       id: 0,
       Username: ['', [Validators.required]],
       Password: ['', [Validators.required, Validators.minLength(6)]],
-      Email: ['', [Validators.required,Validators.email]],
+      Email: ['', [Validators.required, Validators.email]],
       Role: 'User'
     });
-    console.log(this.LoginForm.value);
-
   }
+
 
   CreateAccount(): void {
-      $.ajax({
-        url: "http://192.168.4.110:48935/api/Users",
-        type: "POST",
-        async: true,
-        crossDomain: true,
-        dataType: "json",
-        data: JSON.stringify({
-          "username": this.LoginForm.value.Username,
-          "password": this.LoginForm.value.Password,
-          "email": this.LoginForm.value.Email,
-          "role": "User"
-        }),
-        "error": function (jqXHR: { status: number; }, exception: any) {
-          if (jqXHR.status == 400) {
+    var Usernametaken = this._LoginService.TakenUsernameBehavior;
+    $.ajax({
+      url: "http://192.168.4.110:48935/api/Users",
+      type: "POST",
+      async: true,
+      crossDomain: true,
+      dataType: "json",
+      data: JSON.stringify({
+        "username": this.LoginForm.value.Username,
+        "password": this.LoginForm.value.Password,
+        "email": this.LoginForm.value.Email,
+        "role": "User"
+      }),
+      "error": function (jqXHR: { status: number; }, exception: any) {
+        switch (jqXHR.status) {
+          case 400:
             alert('wrong');
-          }
-          else if(jqXHR.status == 500){
-            alert('wrong');
-          }
-        },
-        contentType: "application/json; charset=utf-8",
-      });
-      console.log(this.LoginForm.value.Username);
+            Usernametaken.next(true);
+            break;
+
+          case 403:
+            alert('All fields must be filled');
+            break;
+
+          case 500:
+            alert('Looks like we are having issues with our servers, try again later');
+            break;
+
+          default:
+            break;
+        }
+      },
+      contentType: "application/json; charset=utf-8",
+    });
+    console.log(Usernametaken);
   }
 
-  Login() {
-    let token;
-    var UID = "UserID";
-    var LT;
-    $.ajax({
+  public Login(): void {
+    var ProfileBehavior = this._LoginService.ProfileBehavior;
+    var router = this._router;
+    var settings = {
       url: "http://192.168.4.110:48935/api/Users/Login",
       type: "POST",
       async: true,
@@ -89,23 +97,41 @@ export class LoginComponent implements OnInit {
         "password": this.LoginForm.value.Password,
       }),
       "error": function (jqXHR: { status: number; }, exception: any) {
-        if (jqXHR.status == 400) {
-          alert('wrong');
-        }
-        else if(jqXHR.status == 500){
-          alert('wrong');
+        switch (jqXHR.status) {
+          case 400:
+            alert('wrong');
+            break;
+
+          case 403:
+            alert('All fields must be filled');
+            break;
+
+          case 404:
+            alert("User not found");
+          break;
+
+          case 500:
+            alert('Looks like we are having issues with our servers, try again later');
+            break;
+
+          default:
+            break;
         }
       },
-      success: function(data) {
-        token = data;
-        localStorage.setItem(UID, token);
-        LT = localStorage.UserID;
-        console.log(LT);
-      },
-      contentType: "application/json; charset=utf-8",
+      contentType: "application/json; charset=utf-8"
+    }
+    $.ajax(settings).done(function (data) {
+      localStorage.setItem('token',data);
+      ProfileBehavior.next(true);
+      router.navigate(['/home']);
     });
   }
 
+  formControlValueChanged() {
+    this.LoginForm.get('Username')?.valueChanges.subscribe(
+      (mode: string) => {
+        this._LoginService.TakenUsernameBehavior.next(false);
+      });
+  }
 }
-
 
