@@ -18,7 +18,9 @@ import { ThisReceiver } from '@angular/compiler';
 export class LoginComponent implements OnInit {
 
   LoginForm: FormGroup = new FormGroup({});
-  
+
+  RememberMe:boolean=false; 
+
   constructor(private _router: Router, public _LoginService: LoginService, private fb: FormBuilder) {
   }
   
@@ -84,6 +86,7 @@ export class LoginComponent implements OnInit {
   public Login(): void {
     var ProfileBehavior = this._LoginService.ProfileBehavior;
     var router = this._router;
+    var RememberMe = this.RememberMe;
     var settings = {
       url: "http://192.168.4.110:48935/api/Users/Login",
       type: "POST",
@@ -122,7 +125,13 @@ export class LoginComponent implements OnInit {
       contentType: "application/json; charset=utf-8"
     }
       $.ajax(settings).done(function (data) {
-        localStorage.setItem('token', data);
+        if (RememberMe) {
+          localStorage.setItem('token',data);
+        }
+        else{
+          sessionStorage.setItem('token',data);
+          console.log(sessionStorage);
+        }
         ProfileBehavior.next(true);
         router.navigate(['/home']);
       });
@@ -134,5 +143,14 @@ export class LoginComponent implements OnInit {
       (mode: string) => {
         this._LoginService.TakenUsernameBehavior.next(false);
       });
+  }
+
+  ToggleRememberMe(event: any){
+    if (event.target.checked) {
+      this.RememberMe = true;
+    }
+    else{
+      this.RememberMe = false;
+    }
   }
 }
