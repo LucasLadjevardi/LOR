@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { LoginService } from '../service/login.service';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormBuilder} from '@angular/forms';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-profile',
@@ -50,8 +51,8 @@ export class ProfileComponent implements OnInit {
   EditAccount(){
     var router = this._router;
     var settings = {
-      url: "http://192.168.4.110:48935/api/Users/",
-      type: "put",
+      url: `http://192.168.4.110:48935/api/Users/${localStorage.getItem('token')}`,
+      type: "PUT",
       async: true,
       crossDomain: true,
       dataType: "json",

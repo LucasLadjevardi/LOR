@@ -121,11 +121,12 @@ export class LoginComponent implements OnInit {
       },
       contentType: "application/json; charset=utf-8"
     }
-    $.ajax(settings).done(function (data) {
-      localStorage.setItem('token',data);
-      ProfileBehavior.next(true);
-      router.navigate(['/home']);
-    });
+      $.ajax(settings).done(function (data) {
+        localStorage.setItem('token', data);
+        ProfileBehavior.next(true);
+        router.navigate(['/home']);
+      });
+    
   }
 
   formControlValueChanged() {
@@ -135,4 +136,3 @@ export class LoginComponent implements OnInit {
       });
   }
 }
-

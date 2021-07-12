@@ -11,11 +11,15 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class NavbarComponent implements OnInit {
 
  
-  constructor(private _router: Router, public LoginService: LoginService) { }
+  constructor(private _router: Router, public _LoginService: LoginService) { }
 
   ngOnInit(): void {
     this.HideNavBar();
-    this.LoginService.IsLogged.subscribe()
+    this._LoginService.IsLogged.subscribe()
+    if(localStorage.getItem('token') != null)
+    {
+      this._LoginService.ProfileBehavior.next(true);
+    }
   }
   
   HideNavBar(){
@@ -40,42 +44,15 @@ export class NavbarComponent implements OnInit {
   }
 
   LogOut(){
-    //kan du se det nu?
-    this._router.navigate(['/home']);
-    this.LoginService.ProfileBehavior.next(false);
+    if(localStorage.getItem('token') != null)
+    {
+      localStorage.removeItem('token');
+      this._LoginService.ProfileBehavior.next(false);
+      this._router.navigate(['/login']);
+    }
+    else
+    {
+      this._router.navigate(['/home']);
+    }
   }
-
-  /*TestToSeeIfUserIsLogin(User:boolean){
-    if(User==true){
-      console.log("vi er inde",User)
-      this.ProfileBehavior.next(true);
-    }
-    else{
-      alert("bad login")
-    }
-    console.log("vi kom ikke ind",User)
-    console.log(this.ProfileBehavior.getValue())
-    
-  }*/
-
-  
-  /*TestForAtLaveEnLoginMeun(){
-    const LoginButton = document.getElementById("LoginButton")
-    const dropdown = document.createElement("div")
-    const form = document.getElementById("Login")
-    LoginButton?.remove();
-    form?.appendChild(dropdown)
-    dropdown.setAttribute('class','dropdown')
-    dropdown.innerHTML =`
-          <button class="btn btn-sm text-success rounded-circle dropdown-toggle"  data-bs-toggle="collapse" data-bs-target="#LoginMenu"  
-          aria-controls="LoginMenu" aria-expanded="false" aria-label="Toggle navigation">
-           <i class="fas fa-user icon-hover"></i>
-          </button>
-          <ul class=" dropdown-menu dropdown-menu-end" id="LoginMenu" aria-labelledby="LoginMenu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-    `
-  }*/
 }

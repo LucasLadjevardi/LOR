@@ -6,12 +6,12 @@
             <button class="btn btn-sm btn-outline-transparrent navtext-hover" routerLink="/store" type="button">Store</button>
             <button class="btn btn-sm btn-outline-transparrent navtext-hover"  routerLink="/about" type="button">About</button>
         </form>
-        <form *ngIf="(this.LoginService.IsLogged  | async)== false">
+        <form *ngIf="(this._LoginService.IsLogged  | async)== false">
            <button class="btn btn-sm  text-success rounded-circle" (click)="LoginRoute()"  type="button" >
                <i class="fas fa-user fa-2x icon-hover"></i>
             </button>
         </form>
-        <div class="dropdown" *ngIf="(this.LoginService.IsLogged  | async)== true">
+        <div class="dropdown" *ngIf="(this._LoginService.IsLogged  | async)== true">
             <button class="btn btn-sm  text-success rounded-circle dropdown-toggle" type="button" id="LoginButton" data-bs-toggle="collapse" 
             data-bs-auto-close="true" aria-expanded="false" ><i class="fas fa-user fa-2x icon-hover" aria-label="Toggle navigation"></i>
             </button>
