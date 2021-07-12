@@ -6,30 +6,31 @@ import * as $ from 'jquery';
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import { style } from '@angular/animations';
-import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormBuilder, AbstractControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormBuilder, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
   LoginForm: FormGroup = new FormGroup({});
-
-  constructor(private _router: Router, public _LoginService: LoginService, private fb: FormBuilder) { }
-
+  
+  constructor(private _router: Router, public _LoginService: LoginService, private fb: FormBuilder) {
+  }
+  
   get Username() { return this.LoginForm.get('Username'); }
   get Password() { return this.LoginForm.get('Password'); }
   get Email() { return this.LoginForm.get('Email'); }
-
   ngOnInit(): void {
     this._LoginService.IsLogged.subscribe();
     this._LoginService.TakenUsername.subscribe();
     this.initializeForm();
     this.formControlValueChanged();
   }
-
 
   initializeForm(): void {
     this.LoginForm = this.fb.group({
