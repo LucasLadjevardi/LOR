@@ -35,6 +35,28 @@ export class ProfileComponent implements OnInit {
     }
     this._LoginService.TakenUsername.subscribe();
     this.initializeForm();
+    var token;
+    if(sessionStorage.getItem('token') != null){
+      console.log('sessionToken')
+      token = sessionStorage.getItem('token');
+    }
+    else if(localStorage.getItem('token') != null){
+      console.log('localToken')
+      token = localStorage.getItem('token');
+    }
+    var settings = {
+      url: `http://192.168.4.110:48935/api/Users/${token}`,
+      type: "GET",
+      async: true,
+      headers: {
+        "Authorization": localStorage.getItem('token')
+      },
+      crossDomain: true,
+      dataType: "json",
+    }
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+    });
   }
 
   initializeForm(): void {

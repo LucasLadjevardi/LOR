@@ -127,14 +127,15 @@ export class LoginComponent implements OnInit {
     $.ajax(settings).done(function (data) {
       if (RememberMe) {
         localStorage.setItem('token', data)
-        if (localStorage.setItem('token', data) != null) {
+        if (localStorage.getItem('token') != null) {
           ProfileBehavior.next(true);
           router.navigate(['/home']);
         }
       }
       else if (!RememberMe) {
+        console.log('you are here')
         sessionStorage.setItem('token', data)
-        if (sessionStorage.setItem('token', data) != null) {
+        if (sessionStorage.getItem('token') != null) {
           ProfileBehavior.next(true);
           router.navigate(['/home']);
         }

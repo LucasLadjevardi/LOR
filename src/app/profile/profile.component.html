@@ -71,7 +71,7 @@
                         <div class="mt-2">
                             <label for="NewPassword" class="form-label text-white">New Password</label>
                             <input type="Password" class="form-control" id="NewPassword" formControlName="NewPassword"
-                                placeholder="Repeat password" name="CreateRepeatPassword" required />
+                                placeholder="Password" name="CreateRepeatPassword" required />
                             <div *ngIf="NewPassword?.invalid && (NewPassword?.dirty || NewPassword?.touched)"
                                 class="alert text-danger">
                                 <div *ngIf="NewPassword?.errors?.required">
@@ -86,7 +86,7 @@
                 </div>
                 <div class="modal-footer bg-dark">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success" (click)="EditAccount()">Save password</button>
+                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal" (click)="EditAccount()">Save password</button>
                 </div>
             </div>
         </div>
