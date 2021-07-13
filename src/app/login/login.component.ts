@@ -19,11 +19,11 @@ export class LoginComponent implements OnInit {
 
   LoginForm: FormGroup = new FormGroup({});
 
-  RememberMe:boolean=false; 
+  RememberMe: boolean = false;
 
   constructor(private _router: Router, public _LoginService: LoginService, private fb: FormBuilder) {
   }
-  
+
   get Username() { return this.LoginForm.get('Username'); }
   get Password() { return this.LoginForm.get('Password'); }
   get Email() { return this.LoginForm.get('Email'); }
@@ -112,7 +112,7 @@ export class LoginComponent implements OnInit {
 
           case 404:
             alert("User not found");
-          break;
+            break;
 
           case 500:
             alert('Looks like we are having issues with our servers, try again later');
@@ -124,17 +124,23 @@ export class LoginComponent implements OnInit {
       },
       contentType: "application/json; charset=utf-8"
     }
-      $.ajax(settings).done(function (data) {
-        if (RememberMe) {
-          localStorage.setItem('token',data);
+    $.ajax(settings).done(function (data) {
+      if (RememberMe) {
+        localStorage.setItem('token', data)
+        if (localStorage.setItem('token', data) != null) {
+          ProfileBehavior.next(true);
+          router.navigate(['/home']);
         }
-        else{
-          sessionStorage.setItem('token',data);
+      }
+      else if (!RememberMe) {
+        sessionStorage.setItem('token', data)
+        if (sessionStorage.setItem('token', data) != null) {
+          ProfileBehavior.next(true);
+          router.navigate(['/home']);
         }
-        ProfileBehavior.next(true);
-        router.navigate(['/home']);
-      });
-    
+      }
+      alert('you dumb?')
+    });
   }
 
   formControlValueChanged() {
@@ -144,11 +150,11 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  ToggleRememberMe(event: any){
+  ToggleRememberMe(event: any) {
     if (event.target.checked) {
       this.RememberMe = true;
     }
-    else{
+    else {
       this.RememberMe = false;
     }
   }
