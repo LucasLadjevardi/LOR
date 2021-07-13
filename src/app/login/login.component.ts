@@ -130,7 +130,6 @@ export class LoginComponent implements OnInit {
         }
         else{
           sessionStorage.setItem('token',data);
-          console.log(sessionStorage);
         }
         ProfileBehavior.next(true);
         router.navigate(['/home']);
