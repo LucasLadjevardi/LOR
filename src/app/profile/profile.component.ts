@@ -12,7 +12,7 @@ import * as $ from 'jquery';
 export class ProfileComponent implements OnInit {
 
   EditForm: FormGroup = new FormGroup({});
-
+  private token: any;
   public UserData = [{
     id: 0,
     Username: '',
@@ -34,18 +34,34 @@ export class ProfileComponent implements OnInit {
       this._router.navigate(['/home'])
     }
     this._LoginService.TakenUsername.subscribe();
-    var token;
     if(sessionStorage.getItem('token') != null){
       console.log('sessionToken')
-      token = sessionStorage.getItem('token');
+      this.token = sessionStorage.getItem('token');
     }
     else if(localStorage.getItem('token') != null){
       console.log('localToken')
-      token = localStorage.getItem('token');
+      this.token = localStorage.getItem('token');
     }
-    var UserHandler;
+    this.initializeForm();
+    this.GetUser();
+  }
+
+  initializeForm(): void {
+    this.EditForm = this.fb.group({
+      'id': 0,
+      'Username': ['', [Validators.required]],
+      'OldPassword': ['', [Validators.required]],
+      'NewPassword': ['', [Validators.required, Validators.minLength(6)]],
+      'Email': ['', [Validators.required, Validators.email]],
+      'Role': 'User'
+    });
+  }
+
+  GetUser()
+  {
+    var Handler: any;
     var settings = {
-      url: `http://192.168.4.110:48935/api/Users/${token}`,
+      url: `http://192.168.4.110:48935/api/Users/${this.token}`,
       type: "GET",
       async: true,
       headers: {
@@ -55,21 +71,10 @@ export class ProfileComponent implements OnInit {
       dataType: "json",
       contentType: "application/json; charset=utf-8"
     }
-    $.ajax(settings).done(function (response) {
-      UserHandler = response;
-      console.log(UserHandler.username)
-    });
-    this.initializeForm(UserHandler);
-  }
-
-  initializeForm(UserHandler: any): void {
-    this.EditForm = this.fb.group({
-      id: 0,
-      Username: [`${UserHandler.username}`, [Validators.required]],
-      OldPassword: ['', [Validators.required]],
-      NewPassword: ['', [Validators.required, Validators.minLength(6)]],
-      Email: [`${UserHandler.email}`, [Validators.required, Validators.email]],
-      Role: 'User'
+    $.ajax(settings).done((response) => {
+      Handler = response;
+      this.EditForm.controls['Username'].setValue(Handler.username);
+      this.EditForm.controls['Email'].setValue(Handler.email);
     });
   }
 
