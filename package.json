@@ -23,15 +23,16 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@types/jquery": "^3.5.5",
-    "bootstrap": "^5.0.1",
+    "bootstrap": "^5.0.2",
     "jquery": "^3.6.0",
+    "latest": "^0.2.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.0.2",
-    "@angular/cli": "~12.0.2",
+    "@angular/cli": "^12.0.5",
     "@angular/compiler-cli": "~12.0.2",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
