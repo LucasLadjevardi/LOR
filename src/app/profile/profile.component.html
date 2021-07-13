@@ -24,41 +24,11 @@
                                 Username is Taken
                             </div>
                         </div>
-                        <div>
-                            <div>
-                                <label for="OldPassword" class="form-label text-white">Old Password</label>
-                                <input type="Password" class="form-control" id="OldPassword"
-                                    formControlName="OldPassword" placeholder="Your password" name="CreatePassword"
-                                    required />
-                                <div *ngIf="OldPassword?.invalid && (OldPassword?.dirty || OldPassword?.touched)"
-                                    class="alert text-danger">
-                                    <div *ngIf="OldPassword?.errors?.required">
-                                        Invalid Password
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label for="NewPassword" class="form-label text-white">New Password</label>
-                                <input type="Password" class="form-control" id="NewPassword"
-                                    formControlName="NewPassword" placeholder="Repeat password"
-                                    name="CreateRepeatPassword" required />
-                                <div *ngIf="NewPassword?.invalid && (NewPassword?.dirty || NewPassword?.touched)"
-                                    class="alert text-danger">
-                                    <div *ngIf="NewPassword?.errors?.required">
-                                        Invalid Password
-                                    </div>
-                                    <div *ngIf="NewPassword?.errors?.minlength">
-                                        Password needs atleast 6 characters
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-2">
+                        <div class="mt-2 mb-2">
                             <label for="Email" class="form-label text-white">E-mail</label>
-                            <input type="text" class="form-control" id="Email" formControlName="Email" 
+                            <input type="text" class="form-control" id="Email" formControlName="Email"
                                 placeholder="E-mail" name="Email" required />
-                            <div *ngIf="Email?.invalid && (Email?.dirty || Email?.touched)"
-                                class="alert text-danger">
+                            <div *ngIf="Email?.invalid && (Email?.dirty || Email?.touched)" class="alert text-danger">
                                 <div *ngIf="Email?.errors?.required">
                                     invalid E-mail
                                 </div>
@@ -69,11 +39,56 @@
                         </div>
                     </div>
                 </div>
-                <div class="mb-3">
-                    <button class="btn btn-outline-dark text-white m-1 w-50" type="submit"
+                <div class="mb-3 ">
+                    <button class="btn btn-outline-dark text-white w-25 me-2" type="submit"
                         (click)="EditAccount()">Save</button>
-                </div> 
+                    <button class="btn btn-outline-dark text-white" type="button" data-bs-toggle="modal"
+                        data-bs-target="#EditPassword">change password</button>
+                </div>
             </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="EditPassword" tabindex="-1" aria-labelledby="EditPasswordLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white-50">
+                    <h5 class="modal-title" id="EditPasswordLabel">change password</h5>
+                </div>
+                <div class="modal-body bg-success">
+                    <form class="needs-validation" [formGroup]="EditForm" novalidate>
+                        <div class="mb-2">
+                            <label for="OldPassword" class="form-label text-white">Old Password</label>
+                            <input type="Password" class="form-control" id="OldPassword" formControlName="OldPassword"
+                                placeholder="Your password" name="CreatePassword" required />
+                            <div *ngIf="OldPassword?.invalid && (OldPassword?.dirty || OldPassword?.touched)"
+                                class="alert text-danger">
+                                <div *ngIf="OldPassword?.errors?.required">
+                                    Invalid Password
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <label for="NewPassword" class="form-label text-white">New Password</label>
+                            <input type="Password" class="form-control" id="NewPassword" formControlName="NewPassword"
+                                placeholder="Repeat password" name="CreateRepeatPassword" required />
+                            <div *ngIf="NewPassword?.invalid && (NewPassword?.dirty || NewPassword?.touched)"
+                                class="alert text-danger">
+                                <div *ngIf="NewPassword?.errors?.required">
+                                    Invalid Password
+                                </div>
+                                <div *ngIf="NewPassword?.errors?.minlength">
+                                    Password needs atleast 6 characters
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success" (click)="EditAccount()">Save password</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

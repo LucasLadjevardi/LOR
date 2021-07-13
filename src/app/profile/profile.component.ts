@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { LoginService } from '../service/login.service';
-import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormBuilder} from '@angular/forms';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import * as $ from 'jquery';
 
 @Component({
@@ -23,11 +23,11 @@ export class ProfileComponent implements OnInit {
   }];
 
   get Username() { return this.EditForm.get('Username'); };
-  get OldPassword() {return this.EditForm.get('OldPassword');};
+  get OldPassword() { return this.EditForm.get('OldPassword'); };
   get NewPassword() { return this.EditForm.get('NewPassword'); };
   get Email() { return this.EditForm.get('Email'); };
 
-  constructor(private _router: Router,public _LoginService: LoginService, private fb: FormBuilder) { }
+  constructor(private _router: Router, public _LoginService: LoginService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     if (!this._LoginService.ProfileBehavior.value) {
@@ -43,15 +43,22 @@ export class ProfileComponent implements OnInit {
       Username: ['', [Validators.required]],
       OldPassword: ['', [Validators.required]],
       NewPassword: ['', [Validators.required, Validators.minLength(6)]],
-      Email: ['', [Validators.required,Validators.email]],
+      Email: ['', [Validators.required, Validators.email]],
       Role: 'User'
     });
   }
 
-  EditAccount(){
+  EditAccount() {
     var router = this._router;
+    var LocalSession: any;
+    if (localStorage.getItem('token') == null) {
+      LocalSession = sessionStorage.getItem('token');
+    }
+    else if (sessionStorage.getItem('token') == null) {
+      LocalSession = localStorage.getItem('token');
+    }
     var settings = {
-      url: `http://192.168.4.110:48935/api/Users/${localStorage.getItem('token')}`,
+      url: `http://192.168.4.110:48935/api/Users/${LocalSession}`,
       type: "PUT",
       async: true,
       crossDomain: true,
@@ -62,12 +69,17 @@ export class ProfileComponent implements OnInit {
         "email": this.EditForm.value.Email,
       }),
       "error": function (jqXHR: { status: number; }, exception: any) {
-        if (jqXHR.status = 400) {
-          alert('wrong');
-        }
+        switch (jqXHR.status) {
+          case 400:
+            alert('wrong');
+            break;
 
-        else if (jqXHR.status = 500) {
-          alert('Looks like we are having issues with our servers, try again later');
+          case 500:
+            alert('Looks like we are having issues with our servers, try again later');
+            break;
+
+          default:
+            break;
         }
 
       },
@@ -78,7 +90,7 @@ export class ProfileComponent implements OnInit {
     });
   };
 
-  routingtohmoe(){
+  routingtohmoe() {
     this._router.navigate(['/home'])
   }
 }
