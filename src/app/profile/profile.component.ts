@@ -35,11 +35,9 @@ export class ProfileComponent implements OnInit {
     }
     this._LoginService.TakenUsername.subscribe();
     if(sessionStorage.getItem('token') != null){
-      console.log('sessionToken')
       this.token = sessionStorage.getItem('token');
     }
     else if(localStorage.getItem('token') != null){
-      console.log('localToken')
       this.token = localStorage.getItem('token');
     }
     this.initializeForm();
