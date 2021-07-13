@@ -34,7 +34,6 @@ export class ProfileComponent implements OnInit {
       this._router.navigate(['/home'])
     }
     this._LoginService.TakenUsername.subscribe();
-    this.initializeForm();
     var token;
     if(sessionStorage.getItem('token') != null){
       console.log('sessionToken')
@@ -44,6 +43,7 @@ export class ProfileComponent implements OnInit {
       console.log('localToken')
       token = localStorage.getItem('token');
     }
+    var UserHandler;
     var settings = {
       url: `http://192.168.4.110:48935/api/Users/${token}`,
       type: "GET",
@@ -53,19 +53,22 @@ export class ProfileComponent implements OnInit {
       },
       crossDomain: true,
       dataType: "json",
+      contentType: "application/json; charset=utf-8"
     }
     $.ajax(settings).done(function (response) {
-      console.log(response);
+      UserHandler = response;
+      console.log(UserHandler.username)
     });
+    this.initializeForm(UserHandler);
   }
 
-  initializeForm(): void {
+  initializeForm(UserHandler: any): void {
     this.EditForm = this.fb.group({
       id: 0,
-      Username: ['', [Validators.required]],
+      Username: [`${UserHandler.username}`, [Validators.required]],
       OldPassword: ['', [Validators.required]],
       NewPassword: ['', [Validators.required, Validators.minLength(6)]],
-      Email: ['', [Validators.required, Validators.email]],
+      Email: [`${UserHandler.email}`, [Validators.required, Validators.email]],
       Role: 'User'
     });
   }
