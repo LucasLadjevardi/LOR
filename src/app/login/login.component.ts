@@ -139,7 +139,6 @@ export class LoginComponent implements OnInit {
           router.navigate(['/home']);
         }
       }
-      alert('you dumb?')
     });
   }
 
